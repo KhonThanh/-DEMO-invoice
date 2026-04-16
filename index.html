@@ -19,340 +19,199 @@
 </head>
 
 <body>
-    <header class="container-f " data-include="./component/header.html"></header>
     <main class="container-f flex flex-col center-hor pos-rel">
-        <section class="container-f swiper slide-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="./img/banner/banner-home.webp" alt="Banner 1">
-                </div>
-                <div class="swiper-slide">
-                    <img src="./img/banner/banner-home.webp" alt="Banner 2">
-                </div>
-                <div class="swiper-slide">
-                    <img src="./img/banner/banner-home.webp" alt="Banner 3">
-                </div>
-                <div class="swiper-slide">
-                    <img src="./img/banner/banner-home.webp" alt="Banner 4">
-                </div>
-            </div>
-            <div class="swiper-pagination custom-dots"></div>
-        </section>
-        <section class="intro-section container-f bg-white-second container-padding flex center-hor">
-            <div class="container-m flex flex-col center-ver text-center gap-20">
-                <h1 class="intro-title text-header-size uppercase bold">Keep walking to Horizon</h2>
-                    <p class="intro-desc container-xs">Giải pháp dẫn đầu & Tư vấn thuế chuẩn quốc tế cho doanh nghiệp
-                        FDI
-                        tại Việt Nam.</p>
-                    <div class="intro-actions flex gap-20">
-                        <a href="javascript:void(0)" class="btn-custom-fit bg-primary text-color-white uppercase">Đăng
-                            ký tư vấn ngay</a>
-                        <a href="javascript:void(0)" class="btn-custom-fit bg-secondary text-color-white uppercase">Khám
-                            phá dịch vụ</a>
-                    </div>
-            </div>
-        </section>
-        <section class="services-section container-f container-padding flex center-hor">
-            <div class="container-l flex flex-col gap-20">
-                <h2 class="section-title text-center bold uppercase">Dịch vụ chuyên nghiệp</h2>
-                <div class="service-list fill-view swiper pos-rel">
-                    <div class="swiper-wrapper">
-                        <article class="service-item swiper-slide">
-                            <div class="service-item__content gap-10 custom-item bg-white flex flex-col pos-rel">
-                                <img src="./img/service/s1.jpg" alt="Dịch vụ kế toán" class="service-img fill-view">
-                                <div class="service-content flex flex-col gap-10 jus-sb">
-                                    <h3 class="service-name text-center bold">
-                                        <a href="./news-detail.html" class="stretched-link">Dịch vụ kế toán</a>
-                                    </h3>
-                                    <p class="service-text clamp-text">
-                                        Mỗi một cơ sở kinh doanh đều phải thực hiện ghi chép các số liệu thông qua hệ
-                                        thống kế toán...
-                                    </p>
-                                    <div class="service-footer flex jus-sb center-ver">
-                                        <span></span>
-                                        <a href="javascript:void(0)" class="service-link">Xem thêm →</a>
-                                    </div>
-                                </div>
-                                </img>
-                        </article>
+        <section class="container-f flex flex-col container-padding bg-white">
+            <div class="container-l flex flex-col gap-10">
 
-                        <article class="service-item swiper-slide">
-                            <div class="service-item__content gap-10 custom-item bg-white flex flex-col pos-rel">
-                                <img src="./img/service/s2.jpg" alt="Dịch vụ thuế" class="service-img fill-view">
-                                <div class="service-content flex flex-col gap-10 jus-sb">
-                                    <h3 class="service-name text-center bold">
-                                        <a href="./news-detail.html" class="stretched-link">Dịch vụ thuế</a>
-                                    </h3>
-                                    <ul class="service-info-list flex flex-col gap-10">
-                                        <li class="flex center-ver gap-10"><i class="icon-tick">✔</i> Thuế môn bài</li>
-                                        <li class="flex center-ver gap-10"><i class="icon-tick">✔</i> Thuế GTGT</li>
-                                        <li class="flex center-ver gap-10"><i class="icon-tick">✔</i> Thuế TN doanh
-                                            nghiệp</li>
-                                    </ul>
-                                    <div class="service-footer flex jus-sb center-ver">
-                                        <span></span>
-                                        <a href="javascript:void(0)" class="service-link">Xem thêm →</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="service-item swiper-slide">
-                            <div class="service-item__content gap-10 custom-item bg-white flex flex-col pos-rel">
-                                <img src="./img/service/s3.jpg" alt="Tư vấn quản lý" class="service-img fill-view">
-                                <div class="service-content flex flex-col gap-10 jus-sb">
-                                    <h3 class="service-name text-center bold">
-                                        <a href="./news-detail.html" class="stretched-link">Tư vấn quản lý</a>
-                                    </h3>
-                                    <p class="service-text clamp-text">
-                                        Dịch vụ Tư vấn quản lý của HORIZON hỗ trợ khách hàng ở tất cả các khâu trong quá
-                                        trình tồn tại...
-                                    </p>
-                                    <div class="service-footer flex jus-sb center-ver">
-                                        <span></span>
-                                        <a href="javascript:void(0)" class="service-link">Xem thêm →</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="service-item swiper-slide">
-                            <div class="service-item__content gap-10 custom-item bg-white flex flex-col pos-rel">
-                                <img src="./img/service/s4.jpg" alt="Tư vấn đầu tư" class="service-img fill-view">
-                                <div class="service-content flex flex-col gap-10 jus-sb">
-                                    <h3 class="service-name text-center bold">
-                                        <a href="./news-detail.html" class="stretched-link">Tư vấn đầu tư</a>
-                                    </h3>
-                                    <ul class="service-info-list flex flex-col gap-10">
-                                        <li class="flex center-ver gap-10"><i class="icon-tick">✔</i> Tư vấn quản lý
-                                        </li>
-                                        <li class="flex center-ver gap-10"><i class="icon-tick">✔</i> Tư vấn đầu tư</li>
-                                        <li class="flex center-ver gap-10"><i class="icon-tick">✔</i> Tư vấn tài chính
-                                        </li>
-                                    </ul>
-                                    <div class="service-footer flex jus-sb center-ver">
-                                        <span></span>
-                                        <a href="javascript:void(0)" class="service-link">Xem thêm →</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-            </div>
-        </section>
-        <section class="news-section container-f bg-white-second container-padding flex center-hor">
-            <div class="container-l flex flex-col gap-20">
-                <h2 class="section-title text-center bold uppercase">Tin tức chuyên ngành</h2>
-                <div class="news-list fill-view swiper pos-rel">
-                    <div class="swiper-wrapper">
-                        <article class="news-item swiper-slide">
-                            <div class="flex flex-col gap-10 news-item__container cursor-pointer">
-                                <img src="./img/news/n1.jpg" alt="News 1" class="news-img">
-                                <div class="news-content end-ver flex flex-col gap-10">
-                                    <h3 class="news-title"><a href="./news-detail.html" class="stretched-link">Chính
-                                            sách
-                                            thuế mới nhất 2024 dành cho doanh nghiệp FDI</a></h3>
-                                    <p class="news-excerpt clamp-text">Cập nhật những thay đổi quan trọng trong luật
-                                        quản lý
-                                        thuế...</p>
-                                    <a href="javascript:void(0)" class="news-btn bold">→</a>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="news-item swiper-slide">
-                            <div class="flex flex-col gap-10 news-item__container cursor-pointer">
-                                <img src="./img/news/n1.jpg" alt="News 2" class="news-img">
-                                <div class="news-content end-ver flex flex-col gap-10">
-                                    <h3 class="news-title"><a href="./news-detail.html" class="stretched-link">Hướng dẫn
-                                            quyết toán thuế thu nhập cá nhân người nước ngoài</a></h3>
-                                    <p class="news-excerpt clamp-text">Các bước chi tiết để thực hiện kê khai thuế
-                                        TNCN...
-                                    </p>
-                                    <a href="javascript:void(0)" class="news-btn bold">→</a>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="news-item swiper-slide">
-                            <div class="flex flex-col gap-10 news-item__container cursor-pointer">
-                                <img src="./img/news/n1.jpg" alt="News 2" class="news-img">
-                                <div class="news-content end-ver flex flex-col gap-10">
-                                    <h3 class="news-title"><a href="./news-detail.html" class="stretched-link">Hướng dẫn
-                                            quyết toán thuế thu nhập cá nhân người nước ngoài</a></h3>
-                                    <p class="news-excerpt clamp-text">Các bước chi tiết để thực hiện kê khai thuế
-                                        TNCN...
-                                    </p>
-                                    <a href="javascript:void(0)" class="news-btn bold">→</a>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-        </section>
-        <section class="about-section container-f container-padding flex center-hor">
-            <div class="container-l flex center-ver gap-20 flex-wrap">
-                <div class="about-info col-section-2 flex-1 flex flex-col gap-20">
-                    <h2 class="about-title bold text-color-primary">Vì sao chọn chúng tôi?</h2>
-                    <p>Với ngành Kiểm toán, khách hàng cần: Uy tín, Chính xác, Am hiểu địa phương & Quốc tế. Tui lên cho
-                        bồ 4 cái "Bullet points" cực chất để bỏ vào chỗ mấy cái dấu tích xanh nhé:</p>
-                    <div class="about-list flex flex-col gap-10">
-                        <div class="flex gap-20">
-                            <img src="./img/icon/check.svg" alt="Check">
-                            <p> <b>Chuyên gia đa ngôn ngữ (VN - EN - KR):</b>Đội ngũ tư vấn am hiểu sâu sắc thị trường
-                                Việt Nam và sẵn sàng hỗ trợ bằng ngôn ngữ bản
-                                địa của các doanh nghiệp FDI.</p>
+                <div class="flex flex-wrap jus-sb gap-5">
+                    <div class="form-invoice flex flex-col">
+                        <div class="bg-white-second  flex jus-sb center-ver border-bottom-gray">
+                            <h4 class="bold">THÔNG TIN HÓA ĐƠN</h4>
+                            <span>📊</span>
                         </div>
-
-                        <div class="flex gap-20">
-                            <img src="./img/icon/check.svg" alt="Check">
-                            <p><b>Giải pháp 2 trong 1 (Dịch vụ & Công nghệ):</b> Không chỉ tư vấn, chúng tôi cung cấp hệ
-                                thống ERP & Phần mềm kế toán tối ưu để doanh
-                                nghiệp quản trị dữ liệu thời gian thực.</p>
-                        </div>
-
-                        <div class="flex gap-20">
-                            <img src="./img/icon/check.svg" alt="Check">
-                            <p><b>Tuân thủ chuẩn mực quốc tế (IFRS):</b> Đảm bảo mọi báo cáo tài chính đều đạt chuẩn mực
-                                quốc tế, giúp doanh nghiệp tự tin làm
-                                việc với các tập đoàn mẹ và ngân hàng toàn cầu.</p>
-                        </div>
-
-                        <div class="flex gap-20">
-                            <img src="./img/icon/check.svg" alt="Check">
-                            <p><b>Bảo mật dữ liệu tuyệt đối:</b> Hệ thống quản lý thông tin đạt chuẩn, cam kết tính minh
-                                bạch và bảo mật cao nhất cho mọi
-                                hồ sơ của khách hàng.</p>
-                        </div>
-                    </div>
-                    <a href="javascript:void(0)" class="btn-custom-fit bg-primary text-color-white">Khám phá ngay →</a>
-                </div>
-                <div class="about-image col-section-2 flex-1">
-                    <img src="./img/about/why-choose-us.jpg" alt="Why Choose Horizon" class="custom-item img-content">
-                </div>
-            </div>
-        </section>
-        <section class="calculator-section container-f bg-white-second container-padding flex center-hor">
-            <div class="container-l flex center-ver gap-20 flex-wrap">
-                <div class="calc-image col-section-2">
-                    <img src="./img/service/calculator.jpg" alt="Tính phí" class="custom-item img-content">
-                </div>
-                <div class="calc-form-container col-section-2 flex flex-col gap-20 ">
-                    <h3 class="auth-title text-color-primary">Tính phí thử</h3>
-                    <p class="auth-dsec">Ước tính chi phí nhanh chóng cho doanh nghiệp của bạn</p>
-
-                    <form class="js-validate-form  calc-form-custom bg-white flex flex-wrap gap-20"
-                        data-form="calculate-fee">
-                        <div class="form-row col-2 flex flex-col gap-10">
-                            <label for="invoice_qty" class="bold field-label">Số lượng hóa đơn phát sinh (Hóa đơn) /
-                                tháng</label>
-                            <div class="form-group flex">
-                                <input type="number" id="invoice_qty" name="invoice_qty" class="form-input"
-                                    placeholder="Nhập số lượng..." required>
-                                <small class="error-msg"></small>
+                        <div class="padding-20 flex flex-wrap gap-5">
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Ngày xuất</p>
+                                <input type="text" class="input-field flex-1" value="16/04/2026">
                             </div>
-                        </div>
-                        <div class="form-row col-2 flex flex-col gap-10 end-hor">
-                            <label for="revenue" class="bold field-label">Doanh thu / (tỷ VNĐ) / tháng</label>
-                            <div class="form-group flex">
-                                <input type="number" id="revenue" name="revenue" class="form-input"
-                                    placeholder="Nhập doanh thu..." required>
-                                <small class="error-msg"></small>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Số phiếu</p>
+                                <input type="text" class="input-field flex-1 text-error" placeholder="Auto serial">
                             </div>
-                        </div>
-                        <div class="form-row col-2 flex flex-col gap-10">
-                            <label for="industry" class="bold field-label">Ngành nghề chính</label>
-                            <div class="form-group flex flex-1">
-                                <select id="industry" name="industry" class="form-select" required>
-                                    <option value="">Chọn ngành nghề chính</option>
-                                    <option value="trade">Thương mại</option>
-                                    <option value="service">Dịch vụ</option>
-                                    <option value="production">Sản xuất</option>
-                                    <option value="construction">Xây dựng</option>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Số ngày được nợ</p>
+                                <input type="text" class="input-field flex-1">
+                            </div>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Hạn thanh toán</p>
+                                <input type="text" class="input-field flex-1">
+                            </div>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Hình thức thanh toán</p>
+                                <select class="input-field flex-1">
+                                    <option>Chuyển khoản</option>
+                                    <option>Tiền mặt</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-row col-2 flex flex-col gap-10">
-                            <label for="staff_qty" class="bold field-label">Số lao động / ( người )</label>
-                            <div class="form-group flex flex-1">
-                                <input type="number" id="staff_qty" name="staff_qty" class="form-input"
-                                    placeholder="Nhập số lao động..." required>
-                                <small class="error-msg"></small>
-                            </div>
-                        </div>
-                        <div class="form-row col-2 flex flex-col gap-10">
-                            <label for="insurance" class="bold field-label">Đăng ký BHYT, BHXH</label>
-                            <div class="form-group flex flex-1">
-                                <select id="insurance" name="insurance" class="form-select" required>
-                                    <option value="no">Không đăng ký</option>
-                                    <option value="yes">Có đăng ký</option>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Nhân viên bán hàng</p>
+                                <select class="input-field flex-1">
+                                    <option>Nguyễn Văn A</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-row col-2 flex flex-col gap-10">
-                            <label for="branch" class="bold field-label">Chi nhánh VPĐD</label>
-                            <div class="form-group flex flex-1">
-                                <select id="branch" name="branch" class="form-select" required>
-                                    <option value="no">Không</option>
-                                    <option value="yes">Có</option>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Kênh bán hàng</p>
+                                <select class="input-field flex-1">
+                                    <option>Shopee</option>
+                                    <option>Lazada</option>
+                                    <option>TikTok Shop</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-row col-2 flex flex-col gap-10">
-                            <label for="location" class="bold field-label">Địa điểm công ty</p>
-                                <div class="form-group flex">
-                                    <select id="location" name="location" class="form-select" required>
-                                        <option value="hcm">Trong tp HCM</option>
-                                        <option value="other">Ngoài tp HCM</option>
-                                    </select>
-                                </div>
-                        </div>
-                        <div class="form-row col-2 flex flex-col gap-10">
-                            <label for="company_type" class="bold field-label">Loại hình doanh nghiệp</label>
-                            <div class="form-group flex">
-                                <select id="company_type" name="company_type" class="form-select" required>
-                                    <option value="tnhh">TNHH, DNTN</option>
-                                    <option value="joint_stock">Công ty cổ phần</option>
-                                    <option value="fdi">Vốn đầu tư nước ngoài (FDI)</option>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Kho hàng xuất</p>
+                                <select class="input-field flex-1">
+                                    <option>Kho A</option>
                                 </select>
                             </div>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Địa điểm kinh doanh</p>
+                                <input type="text" class="input-field flex-1" value="341 Lê Trọng Tấn">
+                            </div>
                         </div>
-                        <div class="col-1 flex">
-                            <button type="submit"
-                                class="btn-submit-calc bg-secondary text-color-white btn-custom-fit bold">Thành
-                                tiền</button>
+                    </div>
+
+                    <div class="form-invoice flex flex-col ">
+                        <div class="bg-white-second  flex jus-sb center-ver border-bottom-gray">
+                            <h4 class="bold">THÔNG TIN NGƯỜI MUA</h4>
+                            <span>📊</span>
                         </div>
-                    </form>
+                        <div class="padding-20 flex flex-wrap gap-5">
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Tìm nhanh</p>
+                                <input type="text" class="input-field flex-1 bg-white-second" placeholder="F2 để tìm nhanh">
+                            </div>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Mã đơn vị / Mã KH</p>
+                                <input type="text" class="input-field flex-1">
+                            </div>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Đơn vị mua hàng</p>
+                                <input type="text" class="input-field flex-1">
+                            </div>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Địa chỉ</p>
+                                <input type="text" class="input-field flex-1">
+                            </div>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Ghi chú</p>
+                                <textarea class="input-field flex-1" rows="2"></textarea>
+                            </div>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Mã số thuế</p>
+                                <input type="text" class="input-field flex-1">
+                            </div>
+                            <div class="flex center-ver jus-sb col-2 flex-1">
+                                <p class="input-title">Người mua hàng</p>
+                                <input type="text" class="input-field flex-1">
+                            </div>
+                        </div>
+                        <div class=" flex gap-10 center-hor">
+                            <button class="btn-custom-fit bg-gray-color padding-5-20">Import Excel</button>
+                            <button class="btn-custom-fit bg-gray-color padding-5-20">Tải file đính kèm</button>
+                            <div class="flex center-ver gap-10">
+                                <p>Cho phép chỉnh thành tiền</p>
+                                <input type="checkbox">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <section class="stats-section container-f bg-black text-color-white container-padding flex center-hor">
-            <div class="container-l flex jus-sb center-ver text-center flex-wrap gap-20">
-                <div class="stat-item col-4 flex flex-col gap-10">
-                    <h3 class="stat-number text-color-third">15+</h3>
-                    <p class="stat-label uppercase bold text-color-white">Năm kinh nghiệm</p>
+
+                <div class="dynamic-table" data-main="005C35" data-second="F4FBF4">
+                    <table class="fill-view">
+                        <thead class="bg-primary text-color-white">
+                            <tr>
+                                <th class="">STT</th>
+                                <th>Hành động</th>
+                                <th>Chiết khấu</th>
+                                <th>Khuyến mãi biếu tặng</th>
+                                <th>Ghi chú</th>
+                                <th>Mã SKU</th>
+                                <th>Mã hàng</th>
+                                <th>Tên hàng</th>
+                                <th>Đơn vị</th>
+                                <th>Số lượng</th>
+                                <th>Đơn giá</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td>1</td>
+                                <td>➕ 🔄 ⬇️ 🗑️ 📄</td>
+                                <td><input type="checkbox"></td>
+                                <td><input type="checkbox"></td>
+                                <td><input type="checkbox"></td>
+                                <td>AAA-00001</td>
+                                <td>CB 100A-220V-001</td>
+                                <td class="text-left">CB công suất 100A - điện 220V-001</td>
+                                <td>Cái</td>
+                                <td class="bold">10,00</td>
+                                <td>1.000.000.000</td>
+                                <td class="bold">10.000.000.000</td>
+                            </tr>
+                            <tr class="text-center bg-white-second">
+                                <td>2</td>
+                                <td>➕ 🔄 ⬇️ 🗑️ 📄</td>
+                                <td><input type="checkbox"></td>
+                                <td><input type="checkbox"></td>
+                                <td><input type="checkbox"></td>
+                                <td>AAA-00002</td>
+                                <td>CB 100A-220V-002</td>
+                                <td class="text-left">CB công suất 100A - điện 220V-002</td>
+                                <td>Cái</td>
+                                <td>2,00</td>
+                                <td>250.000</td>
+                                <td>500.000</td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>3</td>
+                                <td>➕ 🔄 ⬇️ 🗑️ 📄</td>
+                                <td><input type="checkbox"></td>
+                                <td><input type="checkbox" checked></td>
+                                <td><input type="checkbox"></td>
+                                <td>AAA-00003</td>
+                                <td>CB 100A-220V-003</td>
+                                <td class="text-left">CB công suất 100A - điện 220V-003 (Hàng mẫu không thu tiền)</td>
+                                <td>Cái</td>
+                                <td class="text-error">2,00</td>
+                                <td class="text-error">250.000</td>
+                                <td class="text-error">500.000</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="stat-item col-4 flex flex-col gap-10">
-                    <h3 class="stat-number text-color-third">500+</h3>
-                    <p class="stat-label uppercase bold text-color-white">Khách hàng FDI</p>
+
+                <div class="flex flex-col gap-20">
+                    <div class="flex flex-col center-ver align-end">
+                        <div class="flex jus-sb gap-30  border-top-black-2 w-400">
+                            <p class="bold uppercase">Tổng tiền thanh toán</p>
+                            <p class="bold text-header-size">10.002.000.000</p>
+                        </div>
+                    </div>
+
+                    <div class="flex jus-sb center-ver">
+                        <button class="btn-custom-fit bg-white-second custom-item -30 bold">DANH SÁCH</button>
+                        <div class="flex gap-20">
+                            <button class="btn-custom-fit bg-gray-color -30 bold">HỦY</button>
+                            <button class="btn-custom-fit bg-primary text-color-white -30 bold">HOÀN
+                                TẤT</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-item col-4 flex flex-col gap-10">
-                    <h3 class="stat-number text-color-third">20+</h3>
-                    <p class="stat-label uppercase bold text-color-white">Chuyên gia CPA</p>
-                </div>
-                <div class="stat-item col-4 flex flex-col gap-10">
-                    <h3 class="stat-number text-color-third">98%</h3>
-                    <p class="stat-label uppercase bold text-color-white">Hài lòng</p>
-                </div>
+
             </div>
         </section>
     </main>
-    <footer class="container-f bg-white center-ver" data-include="./component/footer.html"></footer>
-    <section class="btntotop__container pos-fixed bg-white" data-include="./component/rolltotop.html" id="btnToTop">
-    </section>
     <script defer type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script defer type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

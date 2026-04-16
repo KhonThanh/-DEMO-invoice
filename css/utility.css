@@ -18,6 +18,7 @@
 .gap-30 { gap: 30px; }
 .gap-20 { gap: 20px; }
 .gap-10 { gap: 10px; }
+.gap-5 { gap: 5px; }
 .col-1 { width: 100%; }
 .col-section-2 ,.col-2 { width: calc((100% - var(--gap)) / 2); }
 .col-3 { width: calc((100% - (var(--gap) * 2)) / 3); }
@@ -32,7 +33,7 @@
 .cursor-pointer { cursor: pointer; }
 
 @media (max-width: 1024px) {.col-4,.col-5 {width: calc((100% - (var(--gap) * 2)) / 3);}}
-@media (max-width: 768px) {.col-3,.col-4,.col-5 {width: calc((100% - var(--gap)) / 2);} ; .col-section-2 {width: 100%}}
+@media (max-width: 768px) {.col-3,.col-4,.col-5 {width: calc((100% - var(--gap)) / 2);} .col-section-2 {width: 100%}}
 @media (max-width: 600px) {
   :root {
     --gap: 10px;

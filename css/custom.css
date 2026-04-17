@@ -133,3 +133,8 @@
 .setting-modal.active{
     display: flex !important;
 }
+
+.table-icon img{
+    width: 20px;
+    height: 20px;
+}

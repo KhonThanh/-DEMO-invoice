@@ -101,3 +101,9 @@
 .total-label{
  font-size: calc(var(--font-size-base) - 4px);
 }  
+
+.section-icon__wrapper{
+    aspect-ratio: 2 / 1;
+    max-width: 28px;
+    height: auto;
+}

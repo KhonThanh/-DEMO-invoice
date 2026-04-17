@@ -22,124 +22,158 @@
     <main class="container-f flex flex-col center-hor pos-rel">
         <section class="container-f flex flex-col container-padding bg-white">
             <div class="container-l flex flex-col gap-10">
-
                 <div class="flex flex-wrap jus-sb gap-5">
-                    <div class="form-invoice flex flex-col">
-                        <div class="bg-white-second  flex jus-sb center-ver border-bottom-gray">
+                    <div class="form-invoice invoice-info-section flex flex-col gap-5">
+                        <div class="section-header bg-white-second flex jus-sb center-ver border-bottom-gray">
                             <h4 class="bold">THÔNG TIN HÓA ĐƠN</h4>
                             <span>📊</span>
                         </div>
-                        <div class="padding-20 flex flex-wrap gap-5">
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Ngày xuất</p>
-                                <input type="text" class="input-field flex-1" value="16/04/2026">
+                        <div class="section-body padding-20 flex flex-col gap-5">
+
+                            <div class="form-row date-serial-row flex flex-wrap gap-5 flex-1">
+                                <div class="form-group date-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Ngày xuất</p>
+                                    <input type="text" class="input-field flex-1" value="16/04/2026">
+                                </div>
+                                <div class="form-group serial-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Số phiếu</p>
+                                    <input type="text" class="input-field flex-1 text-error" placeholder="Auto serial">
+                                </div>
                             </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Số phiếu</p>
-                                <input type="text" class="input-field flex-1 text-error" placeholder="Auto serial">
+
+                            <div class="form-row debt-deadline-row flex flex-wrap gap-5 flex-1">
+                                <div class="form-group debt-days-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Số ngày được nợ</p>
+                                    <input type="text" class="input-field flex-1">
+                                </div>
+                                <div class="form-group payment-deadline-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Hạn thanh toán</p>
+                                    <input type="text" class="input-field flex-1">
+                                </div>
                             </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Số ngày được nợ</p>
-                                <input type="text" class="input-field flex-1">
+
+                            <div class="form-row payment-staff-row flex flex-wrap gap-5 flex-1">
+                                <div class="form-group payment-method-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Hình thức thanh toán</p>
+                                    <select class="input-field flex-1">
+                                        <option>Chuyển khoản</option>
+                                        <option>Tiền mặt</option>
+                                    </select>
+                                </div>
+                                <div class="form-group sale-staff-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Nhân viên bán hàng</p>
+                                    <select class="input-field flex-1">
+                                        <option>Nguyễn Văn A</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Hạn thanh toán</p>
-                                <input type="text" class="input-field flex-1">
+
+                            <div class="form-row channel-warehouse-row flex flex-wrap gap-5 flex-1">
+                                <div class="form-group sale-channel-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Kênh bán hàng</p>
+                                    <select class="input-field flex-1">
+                                        <option>Shopee</option>
+                                        <option>Lazada</option>
+                                        <option>TikTok Shop</option>
+                                    </select>
+                                </div>
+                                <div class="form-group export-warehouse-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Kho hàng xuất</p>
+                                    <select class="input-field flex-1">
+                                        <option>Kho A</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Hình thức thanh toán</p>
-                                <select class="input-field flex-1">
-                                    <option>Chuyển khoản</option>
-                                    <option>Tiền mặt</option>
-                                </select>
+
+                            <div class="form-row business-location-row flex flex-wrap gap-5 flex-1">
+                                <div class="form-group location-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Địa điểm kinh doanh</p>
+                                    <input type="text" class="input-field flex-1" value="341 Lê Trọng Tấn">
+                                </div>
                             </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Nhân viên bán hàng</p>
-                                <select class="input-field flex-1">
-                                    <option>Nguyễn Văn A</option>
-                                </select>
-                            </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Kênh bán hàng</p>
-                                <select class="input-field flex-1">
-                                    <option>Shopee</option>
-                                    <option>Lazada</option>
-                                    <option>TikTok Shop</option>
-                                </select>
-                            </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Kho hàng xuất</p>
-                                <select class="input-field flex-1">
-                                    <option>Kho A</option>
-                                </select>
-                            </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Địa điểm kinh doanh</p>
-                                <input type="text" class="input-field flex-1" value="341 Lê Trọng Tấn">
-                            </div>
+
                         </div>
                     </div>
 
-                    <div class="form-invoice flex flex-col ">
-                        <div class="bg-white-second  flex jus-sb center-ver border-bottom-gray">
+                    <div class="form-invoice buyer-info-section flex flex-col gap-5">
+                        <div class="section-header bg-white-second flex jus-sb center-ver border-bottom-gray">
                             <h4 class="bold">THÔNG TIN NGƯỜI MUA</h4>
                             <span>📊</span>
                         </div>
-                        <div class="padding-20 flex flex-wrap gap-5">
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Tìm nhanh</p>
-                                <input type="text" class="input-field flex-1 bg-white-second" placeholder="F2 để tìm nhanh">
+                        <div class="section-body padding-20 flex flex-col gap-5">
+                            <div class="form-row search-tax-row flex flex-wrap gap-5 flex-1">
+                                <div class="form-group quick-search-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Tìm nhanh</p>
+                                    <input type="text" class="input-field flex-1 bg-white-second"
+                                        placeholder="F2 để tìm nhanh">
+                                </div>
+                                <div class="form-group tax-code-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Mã số thuế</p>
+                                    <input type="text" class="input-field flex-1">
+                                </div>
                             </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Mã đơn vị / Mã KH</p>
-                                <input type="text" class="input-field flex-1">
+
+                            <div class="form-row client-id-name-row flex flex-wrap gap-5 flex-1">
+                                <div class="form-group client-id-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Mã đơn vị / Mã KH</p>
+                                    <input type="text" class="input-field flex-1">
+                                </div>
+                                <div class="form-group buyer-name-group flex center-ver jus-sb col-2 flex-1">
+                                    <p class="input-title">Người mua hàng</p>
+                                    <input type="text" class="input-field flex-1">
+                                </div>
                             </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Đơn vị mua hàng</p>
-                                <input type="text" class="input-field flex-1">
+
+                            <div class="form-row client-company-row flex flex-wrap gap-5 flex-1">
+                                <div class="form-group company-group flex center-ver jus-sb flex-1 w-full">
+                                    <p class="input-title">Đơn vị mua hàng</p>
+                                    <input type="text" class="input-field flex-1">
+                                </div>
                             </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Địa chỉ</p>
-                                <input type="text" class="input-field flex-1">
+
+                            <div class="form-row client-address-row flex flex-wrap gap-5 flex-1">
+                                <div class="form-group address-group flex center-ver jus-sb flex-1 w-full">
+                                    <p class="input-title">Địa chỉ</p>
+                                    <input type="text" class="input-field flex-1">
+                                </div>
                             </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Ghi chú</p>
-                                <textarea class="input-field flex-1" rows="2"></textarea>
+
+                            <div class="form-row client-note-row flex flex-wrap gap-5 flex-1">
+                                <div class="form-group note-group flex center-ver jus-sb flex-1 w-full">
+                                    <p class="input-title">Ghi chú</p>
+                                    <textarea class="input-field flex-1" rows="1"></textarea>
+                                </div>
                             </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Mã số thuế</p>
-                                <input type="text" class="input-field flex-1">
-                            </div>
-                            <div class="flex center-ver jus-sb col-2 flex-1">
-                                <p class="input-title">Người mua hàng</p>
-                                <input type="text" class="input-field flex-1">
-                            </div>
+
                         </div>
-                        <div class=" flex gap-10 center-hor">
-                            <button class="btn-custom-fit bg-gray-color padding-5-20">Import Excel</button>
-                            <button class="btn-custom-fit bg-gray-color padding-5-20">Tải file đính kèm</button>
-                            <div class="flex center-ver gap-10">
-                                <p>Cho phép chỉnh thành tiền</p>
-                                <input type="checkbox">
-                            </div>
+
+                        <div class="section-actions flex flex-wrap gap-10 end-hor">
+                            <button class="btn-action__custom cussor-pointer btn-import bg-primary padding-5-20">Import
+                                Excel</button>
+                            <button class="btn-action__custom cussor-pointer btn-download bg-primary padding-5-20">Tải
+                                file đính
+                                kèm</button>
+                            <button class="btn-action__custom cussor-pointer bg-primary padding-5-20">Cho phép chỉnh
+                                thành tiền</button>
+                            <input type="checkbox" class="checkbox-field">
                         </div>
                     </div>
                 </div>
 
                 <div class="dynamic-table" data-main="005C35" data-second="F4FBF4">
-                    <table class="fill-view">
-                        <thead class="bg-primary text-color-white">
+                    <table class="fill-view dynamic-table__content">
+                        <thead class="bg-primary text-color-black">
                             <tr>
                                 <th class="">STT</th>
                                 <th>Hành động</th>
-                                <th>Chiết khấu</th>
-                                <th>Khuyến mãi biếu tặng</th>
-                                <th>Ghi chú</th>
+                                <th>Chiết <br> khấu</th>
+                                <th>Khuyến mãi <br> biếu tặng</th>
+                                <th>Ghi <br> chú</th>
                                 <th>Mã SKU</th>
                                 <th>Mã hàng</th>
                                 <th>Tên hàng</th>
                                 <th>Đơn vị</th>
-                                <th>Số lượng</th>
+                                <th>Số <br> lượng</th>
                                 <th>Đơn giá</th>
                                 <th>Thành tiền</th>
                             </tr>
@@ -159,7 +193,7 @@
                                 <td>1.000.000.000</td>
                                 <td class="bold">10.000.000.000</td>
                             </tr>
-                            <tr class="text-center bg-white-second">
+                            <tr class="text-center ">
                                 <td>2</td>
                                 <td>➕ 🔄 ⬇️ 🗑️ 📄</td>
                                 <td><input type="checkbox"></td>
@@ -192,18 +226,17 @@
                 </div>
 
                 <div class="flex flex-col gap-20">
-                    <div class="flex flex-col center-ver align-end">
-                        <div class="flex jus-sb gap-30  border-top-black-2 w-400">
-                            <p class="bold uppercase">Tổng tiền thanh toán</p>
-                            <p class="bold text-header-size">10.002.000.000</p>
-                        </div>
+                    <div class="invoice-total-group flex center-ver gap-5 end-hor">
+                        <p class="total-label padding-5-20 bg-white bold border-secondary">Tổng tiền thanh toán</p>
+                        <p class="total-amount padding-5-20 bg-white bold border-secondary">10.002.000.000</p>
                     </div>
-
                     <div class="flex jus-sb center-ver">
-                        <button class="btn-custom-fit bg-white-second custom-item -30 bold">DANH SÁCH</button>
+                        <button class="btn-action__custom padding-5-20 bg-primary bold color-text-black">DANH
+                            SÁCH</button>
                         <div class="flex gap-20">
-                            <button class="btn-custom-fit bg-gray-color -30 bold">HỦY</button>
-                            <button class="btn-custom-fit bg-primary text-color-white -30 bold">HOÀN
+                            <button
+                                class="btn-action__custom padding-5-20 bg-primary bold color-text-black">HỦY</button>
+                            <button class="btn-action__custom padding-5-20 bg-primary bold color-text-black">HOÀN
                                 TẤT</button>
                         </div>
                     </div>

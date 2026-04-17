@@ -1,20 +1,24 @@
 .bg-primary { background-color: var(--primary-color); }
 .bg-secondary { background-color: var(--secondary-color); }
+.bg-third { background-color: var(--third-color); }
 .bg-white { background-color: var(--white-background-color); }
 .bg-white-second { background-color: var(--white-background-second-color); }
 .bg-green { background-color: var(--green-color); }
 .bg-black { background-color: var(--black-color); }
 .bg-red { background-color: var(--error-color); }
+.border-secondary { border: 1px solid var(--secondary-color); }
 .text-color-white { color: var(--white-color); }
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
 .flex-wrap { flex-wrap: wrap; }
 .flex-1 { flex-grow: 1; }
 .center-hor { justify-content: center; }
+.end-hor { justify-content: flex-end; }
 .center-ver { align-items: center; }
 .container-padding { padding: 60px 0px; }
 .img-content{ object-fit: cover; object-position: center;}
 .jus-sb { justify-content: space-between; }
+.padding-5-20{padding: 5px 20px;}
 .gap-30 { gap: 30px; }
 .gap-20 { gap: 20px; }
 .gap-10 { gap: 10px; }

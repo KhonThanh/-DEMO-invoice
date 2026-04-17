@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #005C35;
-  --secondary-color: #00844C;
-  --third-color: #00B266;
+  --primary-color: #E2EFDB;
+  --secondary-color: #8E9C85;
+  --third-color: #E5EEDB;
   --white-color: #ffffff;
   --second-white-color: #F4FBF4;
   --black-color: #333333;
@@ -10,7 +10,6 @@
   --header-h: 64px;
   --footer-h: 80px;
   --gap: 5px;
-
   --font-size-base: 16px;
   --font-roboto: 'Roboto', Arial, sans-serif;
   --font-dancing: 'Dancing Script', cursive;

@@ -107,3 +107,29 @@
     max-width: 28px;
     height: auto;
 }
+
+.form-group.active {
+    display: flex; 
+}
+
+.deactive ,
+.form-group.deactive {
+    display: none !important;
+}
+
+.bg-overlay {
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+.z-50 {
+    z-index: 50; 
+}
+
+.setting-modal{
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.setting-modal.active{
+    display: flex !important;
+}

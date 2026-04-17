@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizon | Trang chủ</title>
+    <title>Invoice | Trang chủ</title>
     <link rel="icon" type="image/png" href="./img/logo/logo-favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="./img/banner/banner-home.webp">
@@ -23,6 +23,7 @@
         <section class="container-f flex flex-col container-padding bg-white">
             <div class="container-l flex flex-col gap-10">
                 <div class="flex flex-wrap jus-sb gap-5">
+
                     <div class="form-invoice invoice-info-section flex flex-col gap-5">
                         <div class="section-header bg-white-second flex jus-sb center-ver border-bottom-gray">
                             <h4 class="bold">THÔNG TIN HÓA ĐƠN</h4>
@@ -30,70 +31,86 @@
                                 <img class="section-icon img-content" src="./img/icon/btn-popup.svg" alt="">
                             </div>
                         </div>
-                        <div class="section-body padding-20 flex flex-col gap-5">
 
+                        <div class="section-body padding-20 flex flex-col gap-5">
                             <div class="form-row date-serial-row flex flex-wrap gap-5 flex-1">
-                                <div class="form-group date-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-inv-date"
+                                    class="form-group date-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Ngày xuất</p>
                                     <input type="text" class="input-field flex-1" value="16/04/2026">
                                 </div>
-                                <div class="form-group serial-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-inv-serial"
+                                    class="form-group serial-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Số phiếu</p>
                                     <input type="text" class="input-field flex-1 text-error" placeholder="Auto serial">
                                 </div>
                             </div>
 
                             <div class="form-row debt-deadline-row flex flex-wrap gap-5 flex-1">
-                                <div class="form-group debt-days-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-inv-debt"
+                                    class="form-group debt-days-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Số ngày được nợ</p>
                                     <input type="text" class="input-field flex-1">
                                 </div>
-                                <div class="form-group payment-deadline-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-inv-deadline"
+                                    class="form-group payment-deadline-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Hạn thanh toán</p>
                                     <input type="text" class="input-field flex-1">
                                 </div>
                             </div>
 
                             <div class="form-row payment-staff-row flex flex-wrap gap-5 flex-1">
-                                <div class="form-group payment-method-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-inv-payment"
+                                    class="form-group payment-method-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Hình thức thanh toán</p>
-                                    <select class="input-field flex-1">
-                                        <option>Chuyển khoản</option>
-                                        <option>Tiền mặt</option>
-                                    </select>
+                                    <div class="bg-white flex-1 flex padding-0-10-0-0">
+                                        <select class="input-field flex-1 ">
+                                            <option>Chuyển khoản</option>
+                                            <option>Tiền mặt</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group sale-staff-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-inv-staff"
+                                    class="form-group sale-staff-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Nhân viên bán hàng</p>
-                                    <select class="input-field flex-1">
-                                        <option>Nguyễn Văn A</option>
-                                    </select>
+                                    <div class="bg-white flex-1 flex padding-0-10-0-0">
+                                        <select class="input-field flex-1">
+                                            <option>Nguyễn Văn A</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-row channel-warehouse-row flex flex-wrap gap-5 flex-1">
-                                <div class="form-group sale-channel-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-inv-channel"
+                                    class="form-group sale-channel-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Kênh bán hàng</p>
-                                    <select class="input-field flex-1">
-                                        <option>Shopee</option>
-                                        <option>Lazada</option>
-                                        <option>TikTok Shop</option>
-                                    </select>
+                                    <div class="bg-white flex-1 flex padding-0-10-0-0">
+                                        <select class="input-field flex-1">
+                                            <option>Shopee</option>
+                                            <option>Lazada</option>
+                                            <option>TikTok Shop</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group export-warehouse-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-inv-warehouse"
+                                    class="form-group export-warehouse-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Kho hàng xuất</p>
-                                    <select class="input-field flex-1">
-                                        <option>Kho A</option>
-                                    </select>
+                                    <div class="bg-white flex-1 flex padding-0-10-0-0">
+                                        <select class="input-field flex-1">
+                                            <option>Kho A</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-row business-location-row flex flex-wrap gap-5 flex-1">
-                                <div class="form-group location-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-inv-location"
+                                    class="form-group location-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Địa điểm kinh doanh</p>
                                     <input type="text" class="input-field flex-1" value="341 Lê Trọng Tấn">
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -104,60 +121,66 @@
                                 <img class="section-icon img-content" src="./img/icon/btn-popup.svg" alt="">
                             </div>
                         </div>
+
                         <div class="section-body padding-20 flex flex-col gap-5">
                             <div class="form-row search-tax-row flex flex-wrap gap-5 flex-1">
-                                <div class="form-group quick-search-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-buyer-search"
+                                    class="form-group quick-search-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Tìm nhanh</p>
-                                    <input type="text" class="input-field flex-1 bg-white-second"
+                                    <input type="text" class="input-field flex-1 bg-white"
                                         placeholder="F2 để tìm nhanh">
                                 </div>
-                                <div class="form-group tax-code-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-buyer-tax"
+                                    class="form-group tax-code-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Mã số thuế</p>
                                     <input type="text" class="input-field flex-1">
                                 </div>
                             </div>
 
                             <div class="form-row client-id-name-row flex flex-wrap gap-5 flex-1">
-                                <div class="form-group client-id-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-buyer-id"
+                                    class="form-group client-id-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Mã đơn vị / Mã KH</p>
                                     <input type="text" class="input-field flex-1">
                                 </div>
-                                <div class="form-group buyer-name-group flex center-ver jus-sb col-2 flex-1">
+                                <div id="group-buyer-name"
+                                    class="form-group buyer-name-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="input-title">Người mua hàng</p>
                                     <input type="text" class="input-field flex-1">
                                 </div>
                             </div>
 
                             <div class="form-row client-company-row flex flex-wrap gap-5 flex-1">
-                                <div class="form-group company-group flex center-ver jus-sb flex-1 w-full">
+                                <div id="group-buyer-company"
+                                    class="form-group company-group flex center-ver jus-sb flex-1 w-full active">
                                     <p class="input-title">Đơn vị mua hàng</p>
                                     <input type="text" class="input-field flex-1">
                                 </div>
                             </div>
 
                             <div class="form-row client-address-row flex flex-wrap gap-5 flex-1">
-                                <div class="form-group address-group flex center-ver jus-sb flex-1 w-full">
+                                <div id="group-buyer-address"
+                                    class="form-group address-group flex center-ver jus-sb flex-1 w-full active">
                                     <p class="input-title">Địa chỉ</p>
                                     <input type="text" class="input-field flex-1">
                                 </div>
                             </div>
 
                             <div class="form-row client-note-row flex flex-wrap gap-5 flex-1">
-                                <div class="form-group note-group flex center-ver jus-sb flex-1 w-full">
+                                <div id="group-buyer-note"
+                                    class="form-group note-group flex center-ver jus-sb flex-1 w-full active">
                                     <p class="input-title">Ghi chú</p>
                                     <textarea class="input-field flex-1" rows="1"></textarea>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="section-actions flex flex-wrap gap-10 end-hor">
-                            <button class="btn-action__custom cussor-pointer btn-import bg-primary padding-5-20">Import
+                            <button class="btn-action__custom cursor-pointer btn-import bg-primary padding-5-20">Import
                                 Excel</button>
-                            <button class="btn-action__custom cussor-pointer btn-download bg-primary padding-5-20">Tải
-                                file đính
-                                kèm</button>
-                            <button class="btn-action__custom cussor-pointer bg-primary padding-5-20">Cho phép chỉnh
+                            <button class="btn-action__custom cursor-pointer btn-download bg-primary padding-5-20">Tải
+                                file đính kèm</button>
+                            <button class="btn-action__custom cursor-pointer bg-primary padding-5-20">Cho phép chỉnh
                                 thành tiền</button>
                             <input type="checkbox" class="checkbox-field">
                         </div>
@@ -248,6 +271,35 @@
 
             </div>
         </section>
+        <div id="settingModal"
+            class="f setting-modal pos-fixed bg-overlay center-ver center-hor z-50 w-full-view h-full-view">
+            <div class="container-xxs bg-white padding-20 flex flex-col gap-20 border-radius-5 padding-10">
+                <h3 class="bold border-bottom-gray padding-bottom-10">TÙY CHỌN HIỂN THỊ</h3>
+
+                <div class="flex flex-wrap gap-30">
+                    <div class="flex-1 flex flex-col gap-10">
+                        <p class="bold text-primary">1. Thông tin hóa đơn</p>
+                        <div id="popup-list-inv" class="flex flex-col gap-5">
+                        </div>
+                    </div>
+
+                    <div class="flex-1 flex flex-col gap-10">
+                        <p class="bold text-primary">2. Thông tin người mua</p>
+                        <div id="popup-list-buyer" class="flex flex-col gap-5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-10 border-top-gray padding-top-20">
+                    <button
+                        class="btn-submit-ok flex-1 btn-action__custom bg-primary border-gray cursor-pointer padding-5-20">OK</button>
+                    <button
+                        class="btn-submit-reset flex-1 btn-action__custom bg-primary border-gray cursor-pointer padding-5-20">reset</button>
+                    <button
+                        class="flex-1 btn-action__custom bg-primary border-gray cursor-pointer padding-5-20 btn-close-setting">Cancel</button>
+                </div>
+            </div>
+        </div>
     </main>
     <script defer type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script defer type="text/javascript"

@@ -514,95 +514,144 @@ function initFormValidation(root = document) {
   });
 }
 
+// js chức năng table
+function initDynamicFormSettings() {
+    const DOM = {
+        modal: document.getElementById('settingModal'),
+        btnOpens: document.querySelectorAll('.section-icon__wrapper'),
+        btnOk: document.querySelector('.btn-submit-ok'),
+        btnReset: document.querySelector('.btn-submit-reset'),
+        btnClose: document.querySelector('.btn-close-setting'),
+        containerInv: document.getElementById('popup-list-inv'),
+        containerBuyer: document.getElementById('popup-list-buyer')
+    };
+
+    if (!DOM.modal) return;
+    let defaultActiveFields = [];
+    let isInitialized = false;
+
+    const captureDefaultState = () => {
+        if (isInitialized) return;
+        const allGroups = document.querySelectorAll('.invoice-info-section .form-group, .buyer-info-section .form-group');
+        allGroups.forEach(group => {
+            if (group.id && group.classList.contains('active')) {
+                defaultActiveFields.push(group.id);
+            }
+        });
+        isInitialized = true;
+    };
+    captureDefaultState();
+
+    const buildCheckboxes = (sourceSelector, targetContainer) => {
+        if (!targetContainer) return;
+        targetContainer.innerHTML = ''; 
+        
+        const formGroups = document.querySelectorAll(sourceSelector);
+        
+        formGroups.forEach(group => {
+            const id = group.id;
+            if (!id) return; 
+            
+            const titleEl = group.querySelector('.input-title');
+            const title = titleEl ? titleEl.textContent : 'Chưa đặt tên';
+            const isChecked = group.classList.contains('active') ? 'checked' : '';
+            
+            targetContainer.innerHTML += `
+                <label class="flex center-ver gap-5 cursor-pointer">
+                    <input type="checkbox" class="setting-cb" value="${id}" ${isChecked}> 
+                    ${title}
+                </label>
+            `;
+        });
+    };
+
+    const toggleModal = (show) => {
+        if (show) {
+            DOM.modal.classList.replace('deactive', 'active') || DOM.modal.classList.add('active');
+        } else {
+            DOM.modal.classList.replace('active', 'deactive') || DOM.modal.classList.add('deactive');
+        }
+    };
+
+    DOM.btnOpens.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buildCheckboxes('.invoice-info-section .form-group', DOM.containerInv);
+            buildCheckboxes('.buyer-info-section .form-group', DOM.containerBuyer);
+            toggleModal(true); 
+        });
+    });
+
+    if (DOM.btnOk) {
+        DOM.btnOk.addEventListener('click', () => {
+            const invChecked = DOM.containerInv.querySelectorAll('.setting-cb:checked').length;
+            const buyerChecked = DOM.containerBuyer.querySelectorAll('.setting-cb:checked').length;
+
+            if (invChecked === 0) {
+                alert("⚠️ Thông tin hóa đơn: Bạn phải hiển thị ít nhất 1 trường thông tin!");
+                return; 
+            }
+            if (buyerChecked === 0) {
+                alert("⚠️ Thông tin người mua: Bạn phải hiển thị ít nhất 1 trường thông tin!");
+                return; 
+            }
+
+            const allCheckboxes = DOM.modal.querySelectorAll('.setting-cb');
+            allCheckboxes.forEach(cb => {
+                const targetGroup = document.getElementById(cb.value);
+                if (targetGroup) {
+                    if (cb.checked) {
+                        targetGroup.classList.replace('deactive', 'active') || targetGroup.classList.add('active');
+                    } else {
+                        targetGroup.classList.replace('active', 'deactive') || targetGroup.classList.add('deactive');
+                    }
+                }
+            });
+
+            const allFormRows = document.querySelectorAll('.form-row');
+            allFormRows.forEach(row => {
+                const hasActiveGroup = row.querySelector('.form-group.active') !== null;
+                
+                if (hasActiveGroup) {
+                    row.classList.remove('deactive');
+                    row.classList.add('active');
+                } else {
+                    row.classList.remove('active');
+                    row.classList.add('deactive');
+                }
+            });
+            
+            toggleModal(false); 
+        });
+    }
+
+    if (DOM.btnReset) {
+        DOM.btnReset.addEventListener('click', () => {
+            const checkboxes = DOM.modal.querySelectorAll('.setting-cb');
+            checkboxes.forEach(cb => {
+                cb.checked = defaultActiveFields.includes(cb.value);
+            });
+        });
+    }
+    if (DOM.btnClose) {
+        DOM.btnClose.addEventListener('click', () => toggleModal(false));
+    }
+}
+
 // ----------- Vùng gọi biến --------------
 document.addEventListener("DOMContentLoaded", () => {
-  includeHTML(() => {
-    // 🟢 Slide banner chính (chuyển sang Swiper)
-    initSwiperSlider({
-      mainSelector: '.slide-container',
-      minSlides: 3, // Đảm bảo có ít nhất 3 slide để loop mượt mà
-      autoplay: { delay: 3000, disableOnInteraction: false }, // Tự động chạy sau 3 giây
-      loop: true, // Bật vòng lặp vô hạn
-      slidesPerView: 1, // Hiển thị 1 slide
-      spaceBetween: 0, // Không có khoảng cách
-      pagination: {
-        el: '.swiper-pagination.custom-dots', // Selector cho dots
-        clickable: true,
-      },
-    });
-
-    initSwiperSlider({
-      mainSelector: '.service-list',
-      minSlides: 8,
-      autoplay: { delay: 4000, disableOnInteraction: false },
-      loop: true,
-      slidesPerView: 1, // Mặc định cho mobile
-      spaceBetween: 20,
-      navigation: {
-        nextEl: '.service-list .swiper-button-next',
-        prevEl: '.service-list .swiper-button-prev',
-      },
-      pagination: {
-        el: '.service-list .swiper-pagination',
-        clickable: true,
-      },
-      breakpoints: {
-        500: { slidesPerView: 2, spaceBetween: 20 },
-        768: { slidesPerView: 3, spaceBetween: 20 },
-        1200: { slidesPerView: 4, spaceBetween: 20 },
-      },
-    });
-
-    initSwiperSlider({
-      mainSelector: '.news-list',
-      minSlides: 8,
-      autoplay: { delay: 4000, disableOnInteraction: false },
-      loop: true,
-      slidesPerView: 1, // Mặc định cho mobile
-      spaceBetween: 20,
-      navigation: {
-        nextEl: '.news-list .swiper-button-next',
-        prevEl: '.news-list .swiper-button-prev',
-      },
-      pagination: {
-        el: '.news-list .swiper-pagination',
-        clickable: true,
-      },
-      breakpoints: {
-        500: { slidesPerView: 2, spaceBetween: 20 },
-        768: { slidesPerView: 3, spaceBetween: 20 },
-        1200: { slidesPerView: 3, spaceBetween: 20 },
-      },
-    });
-
-    initToggleSystem([
-      {
-        trigger: ".pagination-btn__custom.page-num",
-        behavior: "activate",
-        activeClass: "active",
-      },
-      {
-        trigger: ".menu-container__bar",
-        target: ".m-menu",
-        behavior: "toggle",
-        activeClass: "active",
-        closeOnOutside: true,
-        closeOnEsc: true,
-        innerSelector: ".m-menu__link" // Đảm bảo click bên trong menu không bị đóng
-      },
-      {
-        trigger: ".news-detail__content h3",
-        behavior: "activate", // 'activate' tự động xử lý việc chỉ có 1 item active
-        activeClass: "active",
-      },
-    ]);
-    // 🟡 roll to the top
-    initScrollToTop();
-    // ✨ 4️⃣ HIỆU ỨNG ẢNH & REVEAL
-    applyImageEnhancements();
-    initRevealEffect();
-    initFormValidation();
-  });
+  initToggleSystem([
+    {
+      trigger: ".section-icon__wrapper",
+      target: ".setting-modal",
+      behavior: "toggle",
+      activeClass: "active",
+      closeOnOutside: true,
+      overlayCloses: true,
+      closeOnEsc: true,
+      closeBtn: ".btn-close-setting"
+    }
+  ]);
+  initDynamicFormSettings()
 });
 
 // 🔁 Cập nhật khi include hoặc slick load lại

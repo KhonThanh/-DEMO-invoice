@@ -8,6 +8,15 @@
     .form-invoice {
         width: calc(100% - 5px);
     }
+
+    .form-invoice__container {
+        gap: 10px;
+    }
+
+    .form-invoice__container,
+    .dynamic-table {
+        margin-bottom: 40px;
+    }
 }
 
 @media screen and (max-width: 1073px) {}

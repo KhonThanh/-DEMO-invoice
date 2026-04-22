@@ -158,6 +158,10 @@ select {
     display: flex ;
 }
 
+.form-group select{
+    padding: 0px 10px 0px 5px !important;
+}
+
 .form-invoice__slot,
 .deactive,
 .form-group.deactive {

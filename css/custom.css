@@ -22,6 +22,17 @@
     white-space: nowrap;
 }
 
+.dynamic-table__content thead tr{
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dynamic-table__content thead tr th{
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
 .dynamic-table__content tr:nth-child(even) td {
     background-color: var(--secondary-color);
 }

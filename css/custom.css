@@ -22,13 +22,13 @@
     white-space: nowrap;
 }
 
-.dynamic-table__content thead tr{
+.dynamic-table__content thead tr {
     border-left: 1px solid rgba(0, 0, 0, 0.1);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.dynamic-table__content thead tr th{
+.dynamic-table__content thead tr th {
     border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -47,7 +47,7 @@
 
 .input-field {
     width: calc(55% - 5px);
-    padding: 6px 10px;
+    padding: 0px 10px;
     border: transparent;
     background-color: var(--white-color);
     transition: border-color 0.2s;
@@ -107,19 +107,26 @@ select {
 }
 
 .form-row {
-    min-height: 24px;
+    min-height: 22px;
 }
 
 .btn-action__custom,
 .form-group {
-    border: 1px solid var(--primary-color);
+    border: 0.1px solid var(--primary-color);
 }
 
 .btn-action__custom {
     font-size: calc(var(--font-size-base) - 4px);
-    min-width: 150px;
-    max-width: 200px;
-    min-height: 24px;
+    width: 100%;
+    max-height: 25px;
+}
+
+.function-container .btn-action__custom:first-child {
+    max-width: 153.02px !important;
+}
+
+.function-container .btn-action__custom{
+    max-width: 141.745px;
 }
 
 .btn-action__custom:hover {
@@ -146,34 +153,22 @@ select {
     z-index: 3;
 }
 
+.form-invoice__slot.active,
 .form-group.active {
-    display: flex;
+    display: flex ;
 }
 
+.form-invoice__slot,
 .deactive,
 .form-group.deactive {
-    display: none !important;
+    display: none ;
 }
 
-.bg-overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-}
 
 .z-50 {
     z-index: 50;
 }
 
-.setting-modal__second,
-.setting-modal {
-    top: 0;
-    left: 0;
-    display: none;
-}
-
-.setting-modal__second.active,
-.setting-modal.active {
-    display: flex !important;
-}
 
 .table-icon {
     width: fit-content;
@@ -191,8 +186,14 @@ select {
     text-align: center;
 }
 
+.row-button td,
 .row-total td {
     background-color: var(--white-color) !important;
+}
+
+.row-button td {
+    border: 1px solid transparent;
+    padding: 5px 0px 0px;
 }
 
 .row-total td:first-child {
@@ -215,4 +216,24 @@ select {
     border: none;
     padding: 0;
     background-color: transparent;
+}
+
+.function-container {
+    margin-top: 10px;
+}
+
+.form-invoice__slot{
+    padding: 5px;
+    border: 0.2px solid var(--primary-color);
+}
+
+.service-info__section{
+    border: 0.1px solid var(--primary-color);
+    padding: 5px;
+    max-width: 400px;
+    display: none;
+}
+
+.service-info__section.active{
+    display: flex;
 }

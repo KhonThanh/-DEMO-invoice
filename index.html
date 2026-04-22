@@ -10,6 +10,7 @@
     <link rel="preload" as="image" href="./img/banner/banner-home.webp">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <!-- <link rel="stylesheet" href="../css/style.min.css"> -->
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/custom.css">
@@ -21,7 +22,7 @@
 <body>
     <main class="container-f flex flex-col center-hor pos-rel">
         <section class="container-f flex flex-col bg-white">
-            <div class="container-l flex flex-col gap-10">
+            <div class="container-l flex flex-col gap-20">
                 <div class="flex flex-wrap jus-sb form-invoice__container">
                     <div class="form-invoice invoice-info-section flex flex-col gap-1">
                         <div class="section-header bg-white-second flex jus-sb center-ver border-bottom-gray">
@@ -30,13 +31,29 @@
                                 <img class="section-icon img-content" src="./img/icon/btn-popup.png" alt="">
                             </div>
                         </div>
+                        <div class="flex-col gap-10 form-invoice__slot ">
+                            <div class="flex flex-wrap gap-30">
+                                <div class="flex-1 flex flex-col gap-5">
+                                    <div id="popup-list-inv" class="flex flex-wrap gap-10 popup-list-inv">
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="section-body padding-20 flex flex-col gap-1 ">
+                            <div class="flex gap-10 border-top-gray padding-top-20">
+                                <button
+                                    class="btn-submit-ok flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">OK</button>
+                                <button
+                                    class="btn-submit-reset flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">reset</button>
+                                <button
+                                    class="flex-1 btn-action__custom bg-secondary border-gray uppercase cursor-pointer padding-5-20 btn-close-setting">Cancel</button>
+                            </div>
+                        </div>
+                        <div class="section-body invoice-info padding-20 flex flex-col gap-1 ">
                             <div class="form-row date-serial-row flex flex-wrap gap-1 flex-1">
                                 <div id="group-inv-date"
                                     class="form-group date-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="flex input-title">Ngày xuất</p>
-                                    <input type="datetime-local" class="input-field flex-1" value="16/04/2026">
+                                    <input type="text" class="input-field flex-1 datepicker-custom" value="22/4/2026">
                                 </div>
                                 <div id="group-inv-serial"
                                     class="form-group serial-group flex center-ver jus-sb col-2 flex-1 active">
@@ -49,12 +66,12 @@
                                 <div id="group-inv-debt"
                                     class="form-group debt-days-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="flex input-title">Số ngày được nợ</p>
-                                    <input type="datetime-local" class="input-field flex-1">
+                                    <input type="text" class="input-field datepicker-custom flex-1" value="22/04/2026">
                                 </div>
                                 <div id="group-inv-deadline"
                                     class="form-group payment-deadline-group flex center-ver jus-sb col-2 flex-1 active">
                                     <p class="flex input-title">Hạn thanh toán</p>
-                                    <input type="datetime-local" class="input-field flex-1">
+                                    <input type="text" class="input-field datepicker-custom flex-1" value="22/04/2026">
                                 </div>
                             </div>
 
@@ -120,8 +137,25 @@
                                 <img class="section-icon img-content" src="./img/icon/btn-popup.png" alt="">
                             </div>
                         </div>
+                        <div class="flex-col gap-10 form-invoice__slot">
+                            <div class="flex flex-wrap gap-30">
+                                <div class="flex-1 flex flex-col gap-5">
+                                    <div id="popup-list-buyer" class="flex flex-wrap gap-10">
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="section-body padding-20 flex flex-col gap-1">
+                            <div class="flex gap-10 border-top-gray padding-top-20">
+                                <button
+                                    class="btn-submit-ok flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">OK</button>
+                                <button
+                                    class="btn-submit-reset flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">reset</button>
+                                <button
+                                    class="flex-1 btn-action__custom bg-secondary border-gray uppercase cursor-pointer padding-5-20 btn-close-setting">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="section-body user-info padding-20 flex flex-col gap-1">
                             <div class="form-row search-tax-row flex flex-wrap gap-1 flex-1">
                                 <div id="group-buyer-search"
                                     class="form-group quick-search-group flex center-ver jus-sb col-2 flex-1 active">
@@ -193,6 +227,31 @@
                     </div>
                 </div>
                 <div class="pos-rel">
+                    <div class="bg-white service-info__section  flex-col gap-10">
+                        <div class="flex flex-col gap-10">
+                            <label class="flex center-ver gap-5 cursor-pointer">
+                                <input type="checkbox" class="setting-cb" value="group-inv-date">
+                                Hàng hóa là xe ô tô, xe mô tô
+                            </label>
+                            <label class="flex center-ver gap-5 cursor-pointer">
+                                <input type="checkbox" class="setting-cb" value="group-inv-date">
+                                Cấu hình dịch vụ vận chuyển
+                            </label>
+                            <label class="flex center-ver gap-5 cursor-pointer">
+                                <input type="checkbox" class="setting-cb" value="group-inv-date">
+                                Cấu hình dịch vụ vận chuyển trên nền tảng số, TMĐT
+                            </label>
+                        </div>
+
+                        <div class="flex gap-10 border-top-gray padding-top-20">
+                            <button
+                                class="btn-submit-ok flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">OK</button>
+                            <button
+                                class="btn-submit-reset flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">reset</button>
+                            <button
+                                class="flex-1 btn-action__custom bg-secondary border-gray uppercase cursor-pointer padding-5-20 btn-close-setting">Cancel</button>
+                        </div>
+                    </div>
                     <div class="dynamic-table" data-main="005C35" data-second="F4FBF4">
                         <table class="fill-view dynamic-table__content">
                             <thead class="bg-third text-color-black">
@@ -329,90 +388,32 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        <div class="flex function-container gap-5 jus-sb">
+                            <button class="btn-action__custom padding-5-20 bg-secondary bold color-text-black">DANH
+                                SÁCH</button>
+                            <div class="function-right__container flex gap-5 flex-1 end-hor">
+                                <button
+                                    class="btn-action__custom padding-5-20 bg-secondary bold color-text-black">HỦY</button>
+                                <button class="btn-action__custom padding-5-20 bg-secondary bold color-text-black">HOÀN
+                                    TẤT</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="section-icon__wrapper-second section-icon__position cursor-pointer pos-abs">
                         <img class="section-icon img-content" src="./img/icon/btn-popup.png" alt="">
                     </div>
                 </div>
-                <div class="flex flex-col gap-10">
-                    <div class="flex jus-sb center-ver gap-10 flex-wrap">
-                        <button class="btn-action__custom padding-5-20 bg-secondary bold color-text-black">DANH
-                            SÁCH</button>
-                        <div class="flex gap-10">
-                            <button
-                                class="btn-action__custom padding-5-20 bg-secondary bold color-text-black">HỦY</button>
-                            <button class="btn-action__custom padding-5-20 bg-secondary bold color-text-black">HOÀN
-                                TẤT</button>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </section>
-        <div id="settingModal"
-            class=" setting-modal pos-fixed bg-overlay center-ver center-hor z-50 w-full-view h-full-view">
-            <div class="container-xxs bg-white padding-20 flex flex-col gap-10 border-radius-5 padding-10">
-                <h3 class="bold border-bottom-gray padding-bottom-10">TÙY CHỌN HIỂN THỊ</h3>
-
-                <div class="flex flex-wrap gap-30">
-                    <div class="flex-1 flex flex-col gap-5">
-                        <p class="bold text-primary">1. Thông tin hóa đơn</p>
-                        <div id="popup-list-inv" class="flex flex-col gap-5">
-                        </div>
-                    </div>
-
-                    <div class="flex-1 flex flex-col gap-5">
-                        <p class="bold text-primary">2. Thông tin người mua</p>
-                        <div id="popup-list-buyer" class="flex flex-col gap-5">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex gap-10 border-top-gray padding-top-20">
-                    <button
-                        class="btn-submit-ok flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">OK</button>
-                    <button
-                        class="btn-submit-reset flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">reset</button>
-                    <button
-                        class="flex-1 btn-action__custom bg-secondary border-gray uppercase cursor-pointer padding-5-20 btn-close-setting">Cancel</button>
-                </div>
-            </div>
-        </div>
-        <div
-            class=" setting-modal__second  pos-fixed bg-overlay center-ver center-hor z-50 w-full-view h-full-view">
-            <div class="container-xxs bg-white padding-20 flex flex-col gap-10 border-radius-5 padding-10">
-                <h3 class="bold border-bottom-gray padding-bottom-10">TÙY CHỌN HIỂN THỊ</h3>
-                <div class="flex flex-col gap-10">
-                    <label class="flex center-ver gap-5 cursor-pointer">
-                        <input type="checkbox" class="setting-cb" value="group-inv-date">
-                        Hàng hóa là xe ô tô, xe mô tô
-                    </label>
-                    <label class="flex center-ver gap-5 cursor-pointer">
-                        <input type="checkbox" class="setting-cb" value="group-inv-date" >
-                        Cấu hình dịch vụ vận chuyển
-                    </label>
-                    <label class="flex center-ver gap-5 cursor-pointer">
-                        <input type="checkbox" class="setting-cb" value="group-inv-date">
-                        Cấu hình dịch vụ vận chuyển trên nền tảng số, TMĐT
-                    </label>
-                </div>
-
-                <div class="flex gap-10 border-top-gray padding-top-20">
-                    <button
-                        class="btn-submit-ok flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">OK</button>
-                    <button
-                        class="btn-submit-reset flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">reset</button>
-                    <button
-                        class="flex-1 btn-action__custom bg-secondary border-gray uppercase cursor-pointer padding-5-20 btn-close-setting">Cancel</button>
-                </div>
-            </div>
-        </div>
     </main>
-    <script defer type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script defer type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script defer type="text/javascript" src="./js/frontend.js"></script>
+
+    <script defer src="./js/frontend.js"></script>
 </body>
 
 </html>

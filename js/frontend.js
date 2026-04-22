@@ -515,150 +515,141 @@ function initFormValidation(root = document) {
 }
 
 // js chức năng table
-function initDynamicFormSettings() {
-    const DOM = {
-        modal: document.getElementById('settingModal'),
-        btnOpens: document.querySelectorAll('.section-icon__wrapper'),
-        btnOk: document.querySelector('.btn-submit-ok'),
-        btnReset: document.querySelector('.btn-submit-reset'),
-        btnClose: document.querySelector('.btn-close-setting'),
-        containerInv: document.getElementById('popup-list-inv'),
-        containerBuyer: document.getElementById('popup-list-buyer')
-    };
+function renderFormSettingsData() {
 
-    if (!DOM.modal) return;
-    let defaultActiveFields = [];
-    let isInitialized = false;
+  const formSections = document.querySelectorAll('.form-invoice');
 
-    const captureDefaultState = () => {
-        if (isInitialized) return;
-        const allGroups = document.querySelectorAll('.invoice-info-section .form-group, .buyer-info-section .form-group');
-        allGroups.forEach(group => {
-            if (group.id && group.classList.contains('active')) {
-                defaultActiveFields.push(group.id);
-            }
-        });
-        isInitialized = true;
-    };
-    captureDefaultState();
+  formSections.forEach(section => {
+    
+    const listContainer = section.querySelector('[id^="popup-list-"]');
+    const formBody = section.querySelector('.section-body');
 
-    const buildCheckboxes = (sourceSelector, targetContainer) => {
-        if (!targetContainer) return;
-        targetContainer.innerHTML = ''; 
-        
-        const formGroups = document.querySelectorAll(sourceSelector);
-        
-        formGroups.forEach(group => {
-            const id = group.id;
-            if (!id) return; 
-            
-            const titleEl = group.querySelector('.input-title');
-            const title = titleEl ? titleEl.textContent : 'Chưa đặt tên';
-            const isChecked = group.classList.contains('active') ? 'checked' : '';
-            
-            targetContainer.innerHTML += `
+    if (!listContainer || !formBody) return;
+
+    const formGroups = formBody.querySelectorAll('.form-group');
+    let htmlString = '';
+
+    formGroups.forEach(group => {
+      if (!group.id) return;
+
+      const isActive = group.classList.contains('active');
+      const title = group.querySelector('.input-title')?.textContent || 'Chưa đặt tên';
+      const isChecked = isActive ? 'checked' : '';
+
+      htmlString += `
                 <label class="flex center-ver gap-5 cursor-pointer">
-                    <input type="checkbox" class="setting-cb" value="${id}" ${isChecked}> 
+                    <input type="checkbox" class="setting-cb" value="${group.id}" ${isChecked}> 
                     ${title}
                 </label>
             `;
-        });
-    };
-
-    const toggleModal = (show) => {
-        if (show) {
-            DOM.modal.classList.replace('deactive', 'active') || DOM.modal.classList.add('active');
-        } else {
-            DOM.modal.classList.replace('active', 'deactive') || DOM.modal.classList.add('deactive');
-        }
-    };
-
-    DOM.btnOpens.forEach(btn => {
-        btn.addEventListener('click', () => {
-            buildCheckboxes('.invoice-info-section .form-group', DOM.containerInv);
-            buildCheckboxes('.buyer-info-section .form-group', DOM.containerBuyer);
-            toggleModal(true); 
-        });
     });
 
-    if (DOM.btnOk) {
-        DOM.btnOk.addEventListener('click', () => {
-            const invChecked = DOM.containerInv.querySelectorAll('.setting-cb:checked').length;
-            const buyerChecked = DOM.containerBuyer.querySelectorAll('.setting-cb:checked').length;
-
-            if (invChecked === 0) {
-                alert("⚠️ Thông tin hóa đơn: Bạn phải hiển thị ít nhất 1 trường thông tin!");
-                return; 
-            }
-            if (buyerChecked === 0) {
-                alert("⚠️ Thông tin người mua: Bạn phải hiển thị ít nhất 1 trường thông tin!");
-                return; 
-            }
-
-            const allCheckboxes = DOM.modal.querySelectorAll('.setting-cb');
-            allCheckboxes.forEach(cb => {
-                const targetGroup = document.getElementById(cb.value);
-                if (targetGroup) {
-                    if (cb.checked) {
-                        targetGroup.classList.replace('deactive', 'active') || targetGroup.classList.add('active');
-                    } else {
-                        targetGroup.classList.replace('active', 'deactive') || targetGroup.classList.add('deactive');
-                    }
-                }
-            });
-
-            const allFormRows = document.querySelectorAll('.form-row');
-            allFormRows.forEach(row => {
-                const hasActiveGroup = row.querySelector('.form-group.active') !== null;
-                
-                if (hasActiveGroup) {
-                    row.classList.remove('deactive');
-                    row.classList.add('active');
-                } else {
-                    row.classList.remove('active');
-                    row.classList.add('deactive');
-                }
-            });
-            
-            toggleModal(false); 
-        });
-    }
-
-    if (DOM.btnReset) {
-        DOM.btnReset.addEventListener('click', () => {
-            const checkboxes = DOM.modal.querySelectorAll('.setting-cb');
-            checkboxes.forEach(cb => {
-                cb.checked = defaultActiveFields.includes(cb.value);
-            });
-        });
-    }
-    if (DOM.btnClose) {
-        DOM.btnClose.addEventListener('click', () => toggleModal(false));
-    }
+    listContainer.innerHTML = htmlString;
+  });
 }
+
+function initSmartFormSettings() {
+  const formSections = document.querySelectorAll('.form-invoice');
+  if (formSections.length === 0) return;
+
+  formSections.forEach(section => {
+    const listContainer = section.querySelector('[id^="popup-list-"]');
+    const formBody = section.querySelector('.section-body');
+
+    if (!listContainer || !formBody) return;
+
+    const formGroups = formBody.querySelectorAll('.form-group');
+    let htmlString = '';
+    const defaultActiveFields = []; 
+
+    formGroups.forEach(group => {
+      if (!group.id) return;
+      const isActive = group.classList.contains('active');
+      if (isActive) defaultActiveFields.push(group.id);
+
+      const title = group.querySelector('.input-title')?.textContent || 'Chưa đặt tên';
+      const isChecked = isActive ? 'checked' : '';
+
+      htmlString += `
+                <label class="flex center-ver gap-5 cursor-pointer">
+                    <input type="checkbox" class="setting-cb" value="${group.id}" ${isChecked}> 
+                    ${title}
+                </label>
+            `;
+    });
+    listContainer.innerHTML = htmlString; 
+
+    const btnOk = section.querySelector('.btn-submit-ok');
+    const btnReset = section.querySelector('.btn-submit-reset');
+    const popupTarget = section.querySelector('.form-invoice__slot');
+    const triggerBtn = section.querySelector('.section-icon__wrapper');
+
+    if (btnReset) {
+      btnReset.addEventListener('click', () => {
+        const checkboxes = listContainer.querySelectorAll('.setting-cb');
+        checkboxes.forEach(cb => cb.checked = defaultActiveFields.includes(cb.value));
+      });
+    }
+
+    if (btnOk) {
+      btnOk.addEventListener('click', () => {
+        const checkboxes = listContainer.querySelectorAll('.setting-cb');
+        const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+
+        if (checkedCount === 0) {
+          alert("⚠️ Bạn phải hiển thị ít nhất 1 trường thông tin!");
+          return;
+        }
+
+        checkboxes.forEach(cb => {
+          const targetGroup = document.getElementById(cb.value);
+          if (targetGroup) {
+            targetGroup.classList.toggle('active', cb.checked);
+            targetGroup.classList.toggle('deactive', !cb.checked);
+          }
+        });
+
+        const allFormRows = formBody.querySelectorAll('.form-row');
+        allFormRows.forEach(row => {
+          const hasActiveGroup = row.querySelector('.form-group.active') !== null;
+          row.classList.toggle('active', hasActiveGroup);
+          row.classList.toggle('deactive', !hasActiveGroup);
+        });
+
+        popupTarget.classList.remove('active');
+        if (triggerBtn) triggerBtn.classList.remove('active');
+      });
+    }
+  });
+
+
+  initToggleSystem([
+    {
+      trigger: '.section-icon__wrapper', 
+      target: '.form-invoice__slot',     
+      behavior: 'toggle',
+      closeOnOutside: true,             
+      closeOnEsc: true,                  
+      closeBtn: '.btn-close-setting',   
+      activeClass: 'active'              
+    }
+  ]);
+}
+// Chạy hàm khi trang web tải xong
+document.addEventListener("DOMContentLoaded", renderFormSettingsData);
+document.addEventListener("DOMContentLoaded", initSmartFormSettings);
 
 // ----------- Vùng gọi biến --------------
 document.addEventListener("DOMContentLoaded", () => {
   initToggleSystem([
     {
-      trigger: ".section-icon__wrapper",
-      target: ".setting-modal",
-      behavior: "toggle",
-      activeClass: "active",
-      closeOnOutside: true,
-      overlayCloses: true,
-      closeOnEsc: true,
-      closeBtn: ".btn-close-setting"
-    },
-    {
-      trigger: ".section-icon__wrapper-second",
-      target: ".setting-modal__second",
-      behavior: "toggle",
-      activeClass: "active",
-      closeOnOutside: true,
-      overlayCloses: true,
-      closeOnEsc: true,
-      closeBtn: ".btn-close-setting"
+      trigger: '.section-icon__wrapper-second',
+      target: '.service-info__section',     
+      behavior: 'toggle',
+      closeOnOutside: true,              
+      closeOnEsc: true,                 
+      closeBtn: '.btn-close-setting',    
+      activeClass: 'active'              
     }
   ]);
   initDynamicFormSettings()
@@ -668,4 +659,13 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("includesLoaded", () => applyImageEnhancements());
 $(document).on("init reInit afterChange", ".slick-slider", function () {
   applyImageEnhancements(this);
+});
+
+$(document).ready(function() {
+    $(".datepicker-custom").datepicker({
+        dateFormat: "dd/mm/yy", 
+        changeMonth: true,      
+        changeYear: true,      
+        firstDay: 0            
+    });
 });

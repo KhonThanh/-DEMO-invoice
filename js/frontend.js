@@ -649,6 +649,16 @@ document.addEventListener("DOMContentLoaded", () => {
       overlayCloses: true,
       closeOnEsc: true,
       closeBtn: ".btn-close-setting"
+    },
+    {
+      trigger: ".section-icon__wrapper-second",
+      target: ".setting-modal__second",
+      behavior: "toggle",
+      activeClass: "active",
+      closeOnOutside: true,
+      overlayCloses: true,
+      closeOnEsc: true,
+      closeBtn: ".btn-close-setting"
     }
   ]);
   initDynamicFormSettings()

@@ -133,6 +133,7 @@ select {
     font-size: calc(var(--font-size-base) - 4px);
 }
 
+.section-icon__wrapper-second,
 .section-icon__wrapper {
     aspect-ratio: 2 / 1;
     max-width: 28px;
@@ -162,12 +163,14 @@ select {
     z-index: 50;
 }
 
+.setting-modal__second,
 .setting-modal {
     top: 0;
     left: 0;
     display: none;
 }
 
+.setting-modal__second.active,
 .setting-modal.active {
     display: flex !important;
 }

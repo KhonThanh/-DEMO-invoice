@@ -311,8 +311,8 @@
                                 </tr>
                             </tbody>
                             <tfoot>
-                                <tr class="spacer-row" >
-                                    <td colspan="12" >
+                                <tr class="spacer-row">
+                                    <td colspan="12">
                                     </td>
                                 </tr>
 
@@ -330,7 +330,7 @@
                             </tfoot>
                         </table>
                     </div>
-                    <div class="section-icon__wrapper section-icon__position cursor-pointer pos-abs">
+                    <div class="section-icon__wrapper-second section-icon__position cursor-pointer pos-abs">
                         <img class="section-icon img-content" src="./img/icon/btn-popup.png" alt="">
                     </div>
                 </div>
@@ -350,7 +350,7 @@
             </div>
         </section>
         <div id="settingModal"
-            class="f setting-modal pos-fixed bg-overlay center-ver center-hor z-50 w-full-view h-full-view">
+            class=" setting-modal pos-fixed bg-overlay center-ver center-hor z-50 w-full-view h-full-view">
             <div class="container-xxs bg-white padding-20 flex flex-col gap-10 border-radius-5 padding-10">
                 <h3 class="bold border-bottom-gray padding-bottom-10">TÙY CHỌN HIỂN THỊ</h3>
 
@@ -366,6 +366,35 @@
                         <div id="popup-list-buyer" class="flex flex-col gap-5">
                         </div>
                     </div>
+                </div>
+
+                <div class="flex gap-10 border-top-gray padding-top-20">
+                    <button
+                        class="btn-submit-ok flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">OK</button>
+                    <button
+                        class="btn-submit-reset flex-1 btn-action__custom bg-secondary uppercase border-gray cursor-pointer padding-5-20">reset</button>
+                    <button
+                        class="flex-1 btn-action__custom bg-secondary border-gray uppercase cursor-pointer padding-5-20 btn-close-setting">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div
+            class=" setting-modal__second active pos-fixed bg-overlay center-ver center-hor z-50 w-full-view h-full-view">
+            <div class="container-xxs bg-white padding-20 flex flex-col gap-10 border-radius-5 padding-10">
+                <h3 class="bold border-bottom-gray padding-bottom-10">TÙY CHỌN HIỂN THỊ</h3>
+                <div class="flex flex-col gap-10">
+                    <label class="flex center-ver gap-5 cursor-pointer">
+                        <input type="checkbox" class="setting-cb" value="group-inv-date">
+                        Hàng hóa là xe ô tô, xe mô tô
+                    </label>
+                    <label class="flex center-ver gap-5 cursor-pointer">
+                        <input type="checkbox" class="setting-cb" value="group-inv-date" >
+                        Cấu hình dịch vụ vận chuyển
+                    </label>
+                    <label class="flex center-ver gap-5 cursor-pointer">
+                        <input type="checkbox" class="setting-cb" value="group-inv-date">
+                        Cấu hình dịch vụ vận chuyển trên nền tảng số, TMĐT
+                    </label>
                 </div>
 
                 <div class="flex gap-10 border-top-gray padding-top-20">

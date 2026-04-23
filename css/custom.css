@@ -22,6 +22,10 @@
     white-space: nowrap;
 }
 
+.dynamic-table__content p{
+    font-size: calc(var(--font-size-base) - 4px);
+}
+
 .dynamic-table__content thead tr {
     border-left: 1px solid rgba(0, 0, 0, 0.1);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -110,7 +114,6 @@ select {
     min-height: 22px;
 }
 
-.btn-action__custom,
 .form-group {
     border: 0.1px solid var(--primary-color);
 }
@@ -190,9 +193,22 @@ select {
     text-align: center;
 }
 
+.row-total__btn td,
 .row-button td,
 .row-total td {
     background-color: var(--white-color) !important;
+}
+
+.row-total__btn td{
+    padding: 0px;
+    border: transparent;
+}
+
+.row-total__btn td:first-child,
+.row-total__btn td:last-child,
+.row-total__btn td:nth-last-child(2) {
+    border-top: 1px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
 }
 
 .row-button td {
@@ -223,7 +239,7 @@ select {
 }
 
 .function-container {
-    margin-top: 10px;
+    margin-top: 1px;
 }
 
 .form-invoice__slot{
@@ -236,8 +252,31 @@ select {
     padding: 5px;
     max-width: 400px;
     display: none;
+    margin-bottom: 1px;
 }
 
 .service-info__section.active{
     display: flex;
+}
+
+.service-info__section label{
+    font-size: calc(var(--font-size-base) - 4px);
+}
+
+.col-oto,
+.col-vanchuyen,
+.col-tmdt {
+    display: none;
+}
+
+.col-oto .border-none,
+.col-vanchuyen .border-none,
+.col-tmdt .border-none{
+    
+} 
+
+.col-oto.active,
+.col-vanchuyen.active,
+.col-tmdt.active {
+    display: table-cell !important; 
 }

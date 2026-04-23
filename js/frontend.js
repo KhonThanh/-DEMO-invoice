@@ -520,7 +520,7 @@ function renderFormSettingsData() {
   const formSections = document.querySelectorAll('.form-invoice');
 
   formSections.forEach(section => {
-    
+
     const listContainer = section.querySelector('[id^="popup-list-"]');
     const formBody = section.querySelector('.section-body');
 
@@ -560,7 +560,7 @@ function initSmartFormSettings() {
 
     const formGroups = formBody.querySelectorAll('.form-group');
     let htmlString = '';
-    const defaultActiveFields = []; 
+    const defaultActiveFields = [];
 
     formGroups.forEach(group => {
       if (!group.id) return;
@@ -577,7 +577,7 @@ function initSmartFormSettings() {
                 </label>
             `;
     });
-    listContainer.innerHTML = htmlString; 
+    listContainer.innerHTML = htmlString;
 
     const btnOk = section.querySelector('.btn-submit-ok');
     const btnReset = section.querySelector('.btn-submit-reset');
@@ -625,16 +625,74 @@ function initSmartFormSettings() {
 
   initToggleSystem([
     {
-      trigger: '.section-icon__wrapper', 
-      target: '.form-invoice__slot',     
+      trigger: '.section-icon__wrapper',
+      target: '.form-invoice__slot',
       behavior: 'toggle',
-      closeOnOutside: true,             
-      closeOnEsc: true,                  
-      closeBtn: '.btn-close-setting',   
-      activeClass: 'active'              
+      closeOnOutside: true,
+      closeOnEsc: true,
+      closeBtn: '.btn-close-setting',
+      activeClass: 'active'
     }
   ]);
 }
+
+// js thêm cột
+
+function setupDynamicTable() {
+    const btnOk = document.querySelector('.btn-submit-ok__table');
+    const btnReset = document.querySelector('.btn-submit-reset__table');
+    const table = document.querySelector('.dynamic-table__content');
+
+    // Nếu không có bảng thì dừng luôn, không báo lỗi
+    if (!table) return;
+
+    // Hàm xử lý logic chính: Ẩn/Hiện cột & Tính toán Colspan
+    function updateColumns() {
+        const allCheckboxes = document.querySelectorAll('.service-info__checkout .setting-cb');
+
+        // 1. Quét checkbox và Bật/Tắt class active
+        allCheckboxes.forEach(checkbox => {
+            const targetClass = checkbox.getAttribute('data-target');
+            if (targetClass) {
+                const targetColumns = document.querySelectorAll('.' + targetClass);
+                if (checkbox.checked) {
+                    targetColumns.forEach(el => el.classList.add('active'));
+                } else {
+                    targetColumns.forEach(el => el.classList.remove('active'));
+                }
+            }
+        });
+
+        // 2. Tính toán lại colspan cho tfoot
+        const visibleNewCols = table.querySelectorAll('thead th.active').length;
+
+        table.querySelectorAll('.spacer-col').forEach(td => {
+            td.colSpan = 12 + visibleNewCols;
+        });
+
+        const totalTd = table.querySelector('.total-span-col');
+        if (totalTd) totalTd.colSpan = 10 + visibleNewCols;
+
+        const btnSpacerTd = table.querySelector('.btn-spacer-col');
+        if (btnSpacerTd) btnSpacerTd.colSpan = 9 + visibleNewCols;
+    }
+
+    // Bắt sự kiện nút OK
+    if (btnOk) {
+        btnOk.addEventListener('click', updateColumns);
+    }
+
+    // Bắt sự kiện nút Reset
+    if (btnReset) {
+        btnReset.addEventListener('click', function () {
+            document.querySelectorAll('.service-info__checkout .setting-cb').forEach(cb => cb.checked = false);
+            updateColumns(); 
+        });
+    }
+}
+
+// Gọi hàm khởi tạo khi trang web đã load xong HTM
+
 // Chạy hàm khi trang web tải xong
 document.addEventListener("DOMContentLoaded", renderFormSettingsData);
 document.addEventListener("DOMContentLoaded", initSmartFormSettings);
@@ -644,28 +702,14 @@ document.addEventListener("DOMContentLoaded", () => {
   initToggleSystem([
     {
       trigger: '.section-icon__wrapper-second',
-      target: '.service-info__section',     
+      target: '.service-info__section',
       behavior: 'toggle',
-      closeOnOutside: true,              
-      closeOnEsc: true,                 
-      closeBtn: '.btn-close-setting',    
-      activeClass: 'active'              
+      closeOnOutside: true,
+      closeOnEsc: true,
+      closeBtn: '.btn-close-setting',
+      activeClass: 'active'
     }
   ]);
-  initDynamicFormSettings()
 });
 
-// 🔁 Cập nhật khi include hoặc slick load lại
-document.addEventListener("includesLoaded", () => applyImageEnhancements());
-$(document).on("init reInit afterChange", ".slick-slider", function () {
-  applyImageEnhancements(this);
-});
-
-$(document).ready(function() {
-    $(".datepicker-custom").datepicker({
-        dateFormat: "dd/mm/yy", 
-        changeMonth: true,      
-        changeYear: true,      
-        firstDay: 0            
-    });
-});
+document.addEventListener('DOMContentLoaded', setupDynamicTable);

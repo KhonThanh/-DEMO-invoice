@@ -671,7 +671,7 @@ function setupDynamicTable() {
         });
 
         const totalTd = table.querySelector('.total-span-col');
-        if (totalTd) totalTd.colSpan = 10 + visibleNewCols;
+        if (totalTd) totalTd.colSpan = 9 + visibleNewCols;
 
         const btnSpacerTd = table.querySelector('.btn-spacer-col');
         if (btnSpacerTd) btnSpacerTd.colSpan = 9 + visibleNewCols;
@@ -721,4 +721,58 @@ $(document).ready(function() {
         changeYear: true,      
         firstDay: 0            
     });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const tableSelector = '.dynamic-table__content';
+    const tableElement = document.querySelector(tableSelector);
+    const rightContainer = document.querySelector('.function-right__container');
+    
+    if (!tableElement || !rightContainer) return;
+
+    // 1. Tạo một thẻ <style> chuyên dụng để chứa class động
+    const styleId = 'dynamic-btn-styles';
+    let styleEl = document.getElementById(styleId);
+    if (!styleEl) {
+        styleEl = document.createElement('style');
+        styleEl.id = styleId;
+        document.head.appendChild(styleEl); // Nhét vào <head> cho chuẩn SEO/DOM
+    }
+
+    // 2. Tự động thêm một class đánh dấu vào cái container của bồ
+    rightContainer.classList.add('dynamic-synced-width');
+
+    const syncWidths = () => {
+        const firstRow = tableElement.querySelector('tr');
+        if (!firstRow) return;
+
+        const cells = firstRow.children;
+        const totalCols = cells.length;
+        if (totalCols < 3) return;
+
+        // Tính tổng 3 cột cuối
+        let totalWidth = 0;
+        for (let i = totalCols - 3; i < totalCols; i++) {
+            totalWidth += cells[i].getBoundingClientRect().width;
+        }
+
+        // TÍNH TOÁN BÙ TRỪ GAP CHÍNH XÁC:
+        // Lấy Tổng Width trừ đi 20px (của cái gap-20), sau đó mới chia đôi cho 2 nút
+        const btnWidth = (totalWidth - 20) / 2;
+
+        // 3. Viết CSS đè vào thẻ <style>. HTML của bồ sẽ hoàn toàn sạch sẽ!
+        styleEl.innerHTML = `
+            .dynamic-synced-width .btn-action__custom {
+                width: ${btnWidth}px !important;
+                flex: none !important; /* Tắt flex đi để nó nghe theo đúng width */
+            }
+        `;
+    };
+
+    // Theo dõi sự thay đổi của bảng
+    const resizeObserver = new ResizeObserver(() => {
+        syncWidths();
+    });
+
+    resizeObserver.observe(tableElement);
 });

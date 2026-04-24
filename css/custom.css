@@ -10,6 +10,10 @@
     white-space: nowrap;
 }
 
+.dynamic-table tbody tr td {
+    width: fit-content;
+}
+
 .dynamic-table th,
 .dynamic-table td {
     font-size: calc(var(--font-size-base) - 4px);
@@ -22,12 +26,12 @@
     white-space: nowrap;
 }
 
-.dynamic-table td input{
+.dynamic-table td input {
     border: transparent;
     background-color: transparent;
 }
 
-.dynamic-table__content p{
+.dynamic-table__content p {
     font-size: calc(var(--font-size-base) - 4px);
 }
 
@@ -38,7 +42,8 @@
 }
 
 .dynamic-table__content thead tr th {
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0px 2px;
 }
 
 
@@ -125,21 +130,13 @@ select {
 
 .btn-action__custom {
     font-size: calc(var(--font-size-base) - 4px);
-    width: 100%;
+    padding: 5px 10px;
     max-height: 25px;
     border: 0.2px solid var(--primary-color);
 }
 
-.function-container .btn-action__custom:first-child {
-    max-width: 153.02px !important;
-}
-
-.function-container .btn-action__custom{
-    max-width: 141.745px;
-}
-
 .btn-action__custom:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     color: var(--white-color);
     border-color: var(--primary-color);
 }
@@ -164,17 +161,17 @@ select {
 
 .form-invoice__slot.active,
 .form-group.active {
-    display: flex ;
+    display: flex;
 }
 
-.form-group select{
+.form-group select {
     padding: 0px 10px 0px 5px !important;
 }
 
 .form-invoice__slot,
 .deactive,
 .form-group.deactive {
-    display: none ;
+    display: none;
 }
 
 
@@ -205,7 +202,7 @@ select {
     background-color: var(--white-color) !important;
 }
 
-.row-total__btn td{
+.row-total__btn td {
     padding: 0px;
     border: transparent;
 }
@@ -248,12 +245,12 @@ select {
     margin-top: 1px;
 }
 
-.form-invoice__slot{
+.form-invoice__slot {
     padding: 5px;
     border: 0.2px solid var(--primary-color);
 }
 
-.service-info__section{
+.service-info__section {
     border: 0.1px solid var(--primary-color);
     padding: 5px;
     max-width: 400px;
@@ -261,11 +258,11 @@ select {
     margin-bottom: 1px;
 }
 
-.service-info__section.active{
+.service-info__section.active {
     display: flex;
 }
 
-.service-info__section label{
+.service-info__section label {
     font-size: calc(var(--font-size-base) - 4px);
 }
 
@@ -277,16 +274,68 @@ select {
 
 .col-oto .border-none,
 .col-vanchuyen .border-none,
-.col-tmdt .border-none{
-    
-} 
+.col-tmdt .border-none {}
 
 .col-oto.active,
 .col-vanchuyen.active,
 .col-tmdt.active {
-    display: table-cell !important; 
+    display: table-cell !important;
 }
 
-.popup-list__item{
+.popup-list__item {
     width: calc(100% / 3 - 5px);
+}
+
+#ui-datepicker-div {
+    width: 200px;
+    border: 1px solid var(--primary-color);
+}
+
+#ui-datepicker-div .ui-datepicker-month,
+#ui-datepicker-div .ui-datepicker-year {
+    font-size: calc(var(--font-size-base) - 6px);
+}
+
+.col-fit {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.col-fit__value73 {
+    width: 73px;
+    white-space: nowrap;
+}
+
+.col-fit__value110 {
+    width: 110px;
+    white-space: nowrap;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
+    background: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 3px;
+    text-align: center;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover{
+    background-color: var(--primary-color);
+}
+
+.ui-datepicker-calendar span{
+    color: var(--primary-color);
+}
+
+.ui-datepicker-header{
+    background-color: var(--secondary-color);
 }

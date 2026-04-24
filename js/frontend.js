@@ -639,56 +639,77 @@ function initSmartFormSettings() {
 // js thêm cột
 
 function setupDynamicTable() {
-    const btnOk = document.querySelector('.btn-submit-ok__table');
-    const btnReset = document.querySelector('.btn-submit-reset__table');
-    const table = document.querySelector('.dynamic-table__content');
+  const btnOk = document.querySelector('.btn-submit-ok__table');
+  const btnReset = document.querySelector('.btn-submit-reset__table');
+  const table = document.querySelector('.dynamic-table__content');
 
-    // Nếu không có bảng thì dừng luôn, không báo lỗi
-    if (!table) return;
+  // Nếu không có bảng thì dừng luôn, không báo lỗi
+  if (!table) return;
 
-    // Hàm xử lý logic chính: Ẩn/Hiện cột & Tính toán Colspan
-    function updateColumns() {
-        const allCheckboxes = document.querySelectorAll('.service-info__checkout .setting-cb');
+  // Hàm xử lý logic chính: Ẩn/Hiện cột & Tính toán Colspan
+  function updateColumns() {
+    const allCheckboxes = document.querySelectorAll('.service-info__checkout .setting-cb');
 
-        // 1. Quét checkbox và Bật/Tắt class active
-        allCheckboxes.forEach(checkbox => {
-            const targetClass = checkbox.getAttribute('data-target');
-            if (targetClass) {
-                const targetColumns = document.querySelectorAll('.' + targetClass);
-                if (checkbox.checked) {
-                    targetColumns.forEach(el => el.classList.add('active'));
-                } else {
-                    targetColumns.forEach(el => el.classList.remove('active'));
-                }
-            }
-        });
+    // 1. Quét checkbox và Bật/Tắt class active
+    allCheckboxes.forEach(checkbox => {
+      const targetClass = checkbox.getAttribute('data-target');
+      if (targetClass) {
+        const targetColumns = document.querySelectorAll('.' + targetClass);
+        if (checkbox.checked) {
+          targetColumns.forEach(el => el.classList.add('active'));
+        } else {
+          targetColumns.forEach(el => el.classList.remove('active'));
+        }
+      }
+    });
 
-        // 2. Tính toán lại colspan cho tfoot
-        const visibleNewCols = table.querySelectorAll('thead th.active').length;
+    // 2. Tính toán lại colspan cho tfoot
+    const visibleNewCols = table.querySelectorAll('thead th.active').length;
 
-        table.querySelectorAll('.spacer-col').forEach(td => {
-            td.colSpan = 12 + visibleNewCols;
-        });
+    table.querySelectorAll('.spacer-col').forEach(td => {
+      td.colSpan = 12 + visibleNewCols;
+    });
 
-        const totalTd = table.querySelector('.total-span-col');
-        if (totalTd) totalTd.colSpan = 9 + visibleNewCols;
+    const totalTd = table.querySelector('.total-span-col');
+    if (totalTd) totalTd.colSpan = 9 + visibleNewCols;
 
-        const btnSpacerTd = table.querySelector('.btn-spacer-col');
-        if (btnSpacerTd) btnSpacerTd.colSpan = 9 + visibleNewCols;
+    const btnSpacerTd = table.querySelector('.btn-spacer-col');
+    if (btnSpacerTd) btnSpacerTd.colSpan = 9 + visibleNewCols;
+  }
+
+  // Bắt sự kiện nút OK
+  if (btnOk) {
+    btnOk.addEventListener('click', updateColumns);
+  }
+
+  // Bắt sự kiện nút Reset
+  if (btnReset) {
+    btnReset.addEventListener('click', function () {
+      document.querySelectorAll('.service-info__checkout .setting-cb').forEach(cb => cb.checked = false);
+      updateColumns();
+    });
+  }
+}
+
+// js đổi màu khi check
+function toggleColor() {
+  const tableBody = document.querySelector('.dynamic-table__content tbody');
+
+  if (!tableBody) return;
+  tableBody.addEventListener('change', function (e) {
+    if (e.target.matches('.cb-khuyenmai')) {
+      const isChecked = e.target.checked;
+      const currentRow = e.target.closest('tr');
+      if (!currentRow) return;
+      const cells = currentRow.querySelectorAll('td');
+      const totalCols = cells.length;
+      if (totalCols >= 3) {
+        for (let i = totalCols - 3; i < totalCols; i++) {
+          cells[i].classList.toggle('note-content', isChecked);
+        }
+      }
     }
-
-    // Bắt sự kiện nút OK
-    if (btnOk) {
-        btnOk.addEventListener('click', updateColumns);
-    }
-
-    // Bắt sự kiện nút Reset
-    if (btnReset) {
-        btnReset.addEventListener('click', function () {
-            document.querySelectorAll('.service-info__checkout .setting-cb').forEach(cb => cb.checked = false);
-            updateColumns(); 
-        });
-    }
+  });
 }
 
 // Gọi hàm khởi tạo khi trang web đã load xong HTM
@@ -710,69 +731,16 @@ document.addEventListener("DOMContentLoaded", () => {
       activeClass: 'active'
     }
   ]);
+  toggleColor()
 });
 
 document.addEventListener('DOMContentLoaded', setupDynamicTable);
-$(document).ready(function() {
-    // Gọi class của ô input để gắn lịch
-    $(".datepicker-custom").datepicker({
-        dateFormat: "dd/mm/yy", 
-        changeMonth: true,      
-        changeYear: true,      
-        firstDay: 0            
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const tableSelector = '.dynamic-table__content';
-    const tableElement = document.querySelector(tableSelector);
-    const rightContainer = document.querySelector('.function-right__container');
-    
-    if (!tableElement || !rightContainer) return;
-
-    // 1. Tạo một thẻ <style> chuyên dụng để chứa class động
-    const styleId = 'dynamic-btn-styles';
-    let styleEl = document.getElementById(styleId);
-    if (!styleEl) {
-        styleEl = document.createElement('style');
-        styleEl.id = styleId;
-        document.head.appendChild(styleEl); // Nhét vào <head> cho chuẩn SEO/DOM
-    }
-
-    // 2. Tự động thêm một class đánh dấu vào cái container của bồ
-    rightContainer.classList.add('dynamic-synced-width');
-
-    const syncWidths = () => {
-        const firstRow = tableElement.querySelector('tr');
-        if (!firstRow) return;
-
-        const cells = firstRow.children;
-        const totalCols = cells.length;
-        if (totalCols < 3) return;
-
-        // Tính tổng 3 cột cuối
-        let totalWidth = 0;
-        for (let i = totalCols - 3; i < totalCols; i++) {
-            totalWidth += cells[i].getBoundingClientRect().width;
-        }
-
-        // TÍNH TOÁN BÙ TRỪ GAP CHÍNH XÁC:
-        // Lấy Tổng Width trừ đi 20px (của cái gap-20), sau đó mới chia đôi cho 2 nút
-        const btnWidth = (totalWidth - 20) / 2;
-
-        // 3. Viết CSS đè vào thẻ <style>. HTML của bồ sẽ hoàn toàn sạch sẽ!
-        styleEl.innerHTML = `
-            .dynamic-synced-width .btn-action__custom {
-                width: ${btnWidth}px !important;
-                flex: none !important; /* Tắt flex đi để nó nghe theo đúng width */
-            }
-        `;
-    };
-
-    // Theo dõi sự thay đổi của bảng
-    const resizeObserver = new ResizeObserver(() => {
-        syncWidths();
-    });
-
-    resizeObserver.observe(tableElement);
+$(document).ready(function () {
+  // Gọi class của ô input để gắn lịch
+  $(".datepicker-custom").datepicker({
+    dateFormat: "dd/mm/yy",
+    changeMonth: true,
+    changeYear: true,
+    firstDay: 0
+  });
 });

@@ -245,6 +245,10 @@ select {
     margin-top: 1px;
 }
 
+.function-container .btn-action__custom {
+    width: calc(294px / 2 - 10px);
+}
+
 .form-invoice__slot {
     padding: 5px;
     border: 0.2px solid var(--primary-color);
@@ -282,6 +286,12 @@ select {
     display: table-cell !important;
 }
 
+.col-vanchuyen input,
+.col-tmdt input,
+.col-oto input {
+    max-width: 100px;
+}
+
 .popup-list__item {
     width: calc(100% / 3 - 5px);
 }
@@ -296,19 +306,27 @@ select {
     font-size: calc(var(--font-size-base) - 6px);
 }
 
+[class^="col-fit"] {
+    white-space: nowrap;
+}
+
 .col-fit {
     width: 1%;
-    white-space: nowrap;
 }
 
 .col-fit__value73 {
     width: 73px;
-    white-space: nowrap;
+    min-width: 73px;
 }
 
 .col-fit__value110 {
     width: 110px;
-    white-space: nowrap;
+    min-width: 110px;
+}
+
+.col-fit__value190 {
+    width: 190px;
+    min-width: 190px;
 }
 
 .ui-state-default,
@@ -328,14 +346,44 @@ html .ui-button.ui-state-disabled:active {
 .ui-widget-header .ui-state-active,
 a.ui-button:active,
 .ui-button:active,
-.ui-button.ui-state-active:hover{
+.ui-button.ui-state-active:hover {
     background-color: var(--primary-color);
 }
 
-.ui-datepicker-calendar span{
+.ui-datepicker-calendar span {
     color: var(--primary-color);
 }
 
-.ui-datepicker-header{
+.ui-datepicker-header {
     background-color: var(--secondary-color);
+}
+
+.note-content {
+    font-weight: bold;
+    color: red;
+}
+
+.hover-volt {
+    position: relative;
+    cursor: pointer;
+}
+
+.hover-volt::after {
+    content: attr(data-volt);
+    position: absolute;
+    top: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+}
+
+.hover-volt:hover::after {
+    opacity: 1;
+    visibility: visible;
 }

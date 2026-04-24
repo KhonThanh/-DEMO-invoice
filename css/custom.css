@@ -22,6 +22,11 @@
     white-space: nowrap;
 }
 
+.dynamic-table td input{
+    border: transparent;
+    background-color: transparent;
+}
+
 .dynamic-table__content p{
     font-size: calc(var(--font-size-base) - 4px);
 }
@@ -230,7 +235,7 @@ select {
 }
 
 .spacer-row {
-    height: 2px;
+    height: 1px;
 }
 
 .spacer-row td {
@@ -280,4 +285,8 @@ select {
 .col-vanchuyen.active,
 .col-tmdt.active {
     display: table-cell !important; 
+}
+
+.popup-list__item{
+    width: calc(100% / 3 - 5px);
 }

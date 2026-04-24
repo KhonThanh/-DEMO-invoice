@@ -537,7 +537,7 @@ function renderFormSettingsData() {
       const isChecked = isActive ? 'checked' : '';
 
       htmlString += `
-                <label class="flex center-ver gap-5 cursor-pointer">
+                <label class="flex center-ver gap-5 cursor-pointer popup-list__item ">
                     <input type="checkbox" class="setting-cb" value="${group.id}" ${isChecked}> 
                     ${title}
                 </label>
@@ -571,7 +571,7 @@ function initSmartFormSettings() {
       const isChecked = isActive ? 'checked' : '';
 
       htmlString += `
-                <label class="flex center-ver gap-5 cursor-pointer">
+                <label class="flex center-ver gap-5 cursor-pointer popup-list__item">
                     <input type="checkbox" class="setting-cb" value="${group.id}" ${isChecked}> 
                     ${title}
                 </label>
@@ -713,3 +713,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener('DOMContentLoaded', setupDynamicTable);
+$(document).ready(function() {
+    // Gọi class của ô input để gắn lịch
+    $(".datepicker-custom").datepicker({
+        dateFormat: "dd/mm/yy", 
+        changeMonth: true,      
+        changeYear: true,      
+        firstDay: 0            
+    });
+});

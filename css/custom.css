@@ -117,7 +117,7 @@ select {
 }
 
 .form-invoice__container {
-    gap: 80px;
+    gap: 62px;
 }
 
 .form-row {
@@ -155,7 +155,7 @@ select {
 
 .section-icon__position {
     left: 0;
-    bottom: 100%;
+    bottom: 99%;
     z-index: 3;
 }
 

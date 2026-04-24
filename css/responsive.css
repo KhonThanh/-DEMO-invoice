@@ -12,11 +12,6 @@
     .form-invoice__container {
         gap: 10px;
     }
-
-    .form-invoice__container,
-    .dynamic-table {
-        margin-bottom: 40px;
-    }
 }
 
 @media screen and (max-width: 1073px) {}
@@ -34,8 +29,13 @@
 /* @media screen and (max-width : 700px) {} */
 
 @media screen and (max-width: 590px) {
-    .section-actions{
+    .section-actions {
         flex-wrap: wrap;
+    }
+
+    .form-invoice__container,
+    .dynamic-table {
+        margin-bottom: 25px;
     }
 }
 

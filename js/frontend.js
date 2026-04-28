@@ -1,39 +1,39 @@
 // ----------- Vùng chức năng -------------
 // 🧩 1️⃣ Include HTML Components
-function includeHTML(callback) {
+async function includeHTML(callback) {
   const elements = document.querySelectorAll("[data-include]");
   if (!elements.length) {
     if (callback) callback();
-    return;
+    return; 
   }
 
-  let loaded = 0;
-
-  Promise.all([...elements].map(async (el) => {
+  // Thêm chữ await ở đây để bắt nó CHỜ tải xong hết các file HTML
+  await Promise.all([...elements].map(async (el) => {
     const file = el.getAttribute("data-include");
     if (!file) return;
 
-    // Sử dụng versioning thay vì cache-busting bằng Date.now() để tận dụng cache trình duyệt
-    const version = "1.0.0"; // Thay đổi version này khi có cập nhật component
+    const version = "1.0.0";
     const cacheKey = `comp-${file}-${version}`;
     let html = sessionStorage.getItem(cacheKey);
 
     if (!html) {
-      // Xóa cache cũ của component này nếu có
       Object.keys(sessionStorage).forEach(key => { if (key.startsWith(`comp-${file}`)) sessionStorage.removeItem(key); });
-      const res = await fetch(file, { cache: "reload" }); // Tải lại file mới nhất từ server
-      html = await res.text();
-      sessionStorage.setItem(cacheKey, html);
+      const res = await fetch(file, { cache: "reload" }); 
+      if (res.ok) { // Check thêm xem có lỗi 404 không cho chắc cốp
+          html = await res.text();
+          sessionStorage.setItem(cacheKey, html);
+      }
     }
 
-    el.innerHTML = html;
-    if (typeof initResponsive === "function") initResponsive(el);
-
-    if (++loaded === elements.length) {
-      document.dispatchEvent(new Event("includesLoaded"));
-      if (callback) callback();
+    if (html) {
+        el.innerHTML = html;
+        if (typeof initResponsive === "function") initResponsive(el);
     }
   }));
+
+  // Khúc này sẽ chạy SAU KHI toàn bộ HTML đã được chèn vào DOM
+  document.dispatchEvent(new Event("includesLoaded"));
+  if (callback) callback();
 }
 
 // js thêm active
@@ -712,14 +712,54 @@ function toggleColor() {
   });
 }
 
+// js đổi màu theme
+function initThemeSwitcher(options = {}) {
+  // 1. Cấu hình mặc định (bồ có thể truyền vào để ghi đè)
+  const radioSelector = options.selector || 'input[name="themeSelector"]';
+
+  // Bảng màu mặc định
+  const palettes = options.palettes || {
+    green: { primary: '#70AD47', secondary: '#E2F0D9', third: '#C6E0B4' },
+    blue: { primary: '#4472C4', secondary: '#D9E1F2', third: '#B4C6E7' },
+    orange: { primary: '#ED7D31', secondary: '#FCE4D6', third: '#F8CBAD' }
+  };
+
+  // 2. Tìm tất cả các radio button đổi theme
+  const themeRadios = document.querySelectorAll(radioSelector);
+  if (!themeRadios.length) return;
+
+  // 3. Gắn sự kiện lắng nghe
+  themeRadios.forEach(radio => {
+    // Mẹo: Tránh việc bị gắn sự kiện nhiều lần nếu gọi hàm lại
+    if (radio.dataset.themeBound === "true") return;
+    radio.dataset.themeBound = "true";
+
+    radio.addEventListener('change', function (e) {
+      // Lấy bộ màu tương ứng với value của radio
+      const selectedTheme = palettes[e.target.value];
+      if (!selectedTheme) return; // Nếu value không có trong bảng màu thì bỏ qua
+
+      // Ghi đè CSS Variables
+      const root = document.documentElement;
+      root.style.setProperty('--primary-color', selectedTheme.primary);
+      root.style.setProperty('--secondary-color', selectedTheme.secondary);
+      root.style.setProperty('--third-color', selectedTheme.third);
+    });
+  });
+}
+
 // Gọi hàm khởi tạo khi trang web đã load xong HTM
 
 // Chạy hàm khi trang web tải xong
-document.addEventListener("DOMContentLoaded", renderFormSettingsData);
-document.addEventListener("DOMContentLoaded", initSmartFormSettings);
 
 // ----------- Vùng gọi biến --------------
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  
+  // 1. Bắt hệ thống phải DỪNG LẠI CHỜ load xong toàn bộ file HTML (Header, Footer, Menu...)
+  await includeHTML();
+
+  // 2. Tới dòng này là 100% HTML đã đầy đủ trên trang. Bắt đầu gọi các hàm khởi tạo:
+  
   initToggleSystem([
     {
       trigger: '.section-icon__wrapper-second',
@@ -731,16 +771,29 @@ document.addEventListener("DOMContentLoaded", () => {
       activeClass: 'active'
     }
   ]);
-  toggleColor()
-});
-
-document.addEventListener('DOMContentLoaded', setupDynamicTable);
-$(document).ready(function () {
-  // Gọi class của ô input để gắn lịch
-  $(".datepicker-custom").datepicker({
-    dateFormat: "dd/mm/yy",
-    changeMonth: true,
-    changeYear: true,
-    firstDay: 0
+  
+  toggleColor();
+  
+  initThemeSwitcher({
+    palettes: {
+      green: { primary: '#70AD47', secondary: '#E2F0D9', third: '#C6E0B4' },
+      blue: { primary: '#4472C4', secondary: '#D9E1F2', third: '#B4C6E7' },
+      orange: { primary: '#ED7D31', secondary: '#FCE4D6', third: '#F8CBAD' },
+      pink: { primary: '#FF69B4', secondary: '#FFB6C1', third: '#FFC0CB' } 
+    }
   });
+
+  renderFormSettingsData();
+  initSmartFormSettings();
+  setupDynamicTable();
+
+  // Kể cả Jquery bồ cũng ném vào đây luôn, không cần $(document).ready() riêng lẻ nữa
+  if (typeof $ !== 'undefined') {
+      $(".datepicker-custom").datepicker({
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear: true,
+        firstDay: 0
+      });
+  }
 });

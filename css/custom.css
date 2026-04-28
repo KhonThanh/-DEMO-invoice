@@ -387,3 +387,26 @@ a.ui-button:active,
     opacity: 1;
     visibility: visible;
 }
+
+.theme-switcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    border: 1px solid var(--primary-color);
+    z-index: 9999; /* Đảm bảo nổi lên trên cùng */
+    width: 220px;
+    transition: border-color 0.3s;
+}
+
+.theme-option {
+    font-size: calc(var(--font-size-base) - 2px);
+}
+
+.color-preview {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid rgba(0,0,0,0.2);
+}

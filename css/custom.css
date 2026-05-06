@@ -392,9 +392,10 @@ a.ui-button:active,
     position: fixed;
     bottom: 20px;
     right: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     border: 1px solid var(--primary-color);
-    z-index: 9999; /* Đảm bảo nổi lên trên cùng */
+    z-index: 9999;
+    /* Đảm bảo nổi lên trên cùng */
     width: 220px;
     transition: border-color 0.3s;
 }
@@ -408,5 +409,65 @@ a.ui-button:active,
     height: 16px;
     border-radius: 50%;
     display: inline-block;
-    border: 1px solid rgba(0,0,0,0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
+
+.invoice-title {
+    font-size: var(--font-size-base);
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--black-color);
+}
+
+.pagination-label,
+.breadcrumb-text {
+    font-size: calc(var(--font-size-base) - 5px);
+}
+
+.btn-add-red,
+.toolbar-left {
+    max-height: 22px;
+}
+
+.btn-add-red {
+    height: 100%;
+    padding: 2px;
+    border: 1px solid var(--primary-color);
+    aspect-ratio: 1 / 1;
+    height: 22px;
+    width: 22px;
+}
+
+.btn-add-red img {
+    width: 100%;
+    height: 100%;
+    max-height: 22px;
+}
+
+.filter-input {
+    min-height: 22px;
+    padding: 0px 5px;
+    max-width: 113px;
+    border: 1px solid var(--primary-color);
+}
+
+.filter-input.exception {
+    min-width: fit-content !important;
+}
+
+.toolbar-right .btn-search {
+    min-height: 22px;
+    min-width: 130px;
+    border: 1px solid var(--primary-color);
+}
+
+.pagination-label{
+    min-height: 22px;
+    border-top: 1px solid var(--primary-color);
+    border-left: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.pagination-select{
+    min-height: 22px;
+    border: 1px solid var(--primary-color);
+} 

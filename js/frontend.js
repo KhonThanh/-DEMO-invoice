@@ -4,7 +4,7 @@ async function includeHTML(callback) {
   const elements = document.querySelectorAll("[data-include]");
   if (!elements.length) {
     if (callback) callback();
-    return; 
+    return;
   }
 
   // Thêm chữ await ở đây để bắt nó CHỜ tải xong hết các file HTML
@@ -18,16 +18,16 @@ async function includeHTML(callback) {
 
     if (!html) {
       Object.keys(sessionStorage).forEach(key => { if (key.startsWith(`comp-${file}`)) sessionStorage.removeItem(key); });
-      const res = await fetch(file, { cache: "reload" }); 
+      const res = await fetch(file, { cache: "reload" });
       if (res.ok) { // Check thêm xem có lỗi 404 không cho chắc cốp
-          html = await res.text();
-          sessionStorage.setItem(cacheKey, html);
+        html = await res.text();
+        sessionStorage.setItem(cacheKey, html);
       }
     }
 
     if (html) {
-        el.innerHTML = html;
-        if (typeof initResponsive === "function") initResponsive(el);
+      el.innerHTML = html;
+      if (typeof initResponsive === "function") initResponsive(el);
     }
   }));
 
@@ -363,89 +363,6 @@ function renderDynamicList(headingData, targetSelector) {
   });
 }
 
-// 🧩 2️⃣ Hàm dùng chung cho tất cả Swiper
-function initSwiperSlider({
-  mainSelector,
-  minSlides = 0, // Số lượng slide tối thiểu cần có để loop mượt mà (nếu loop: true)
-  autoplay = false, // false, true, hoặc object { delay: 2500, disableOnInteraction: false }
-  spaceBetween = 0, // Khoảng cách giữa các slide
-  slidesPerView = 1, // Số lượng slide hiển thị trên mỗi view
-  loop = false, // Bật/tắt chế độ lặp vô hạn
-  navigation = { // Cấu hình nút điều hướng
-    nextEl: null, // Selector của nút next
-    prevEl: null  // Selector của nút prev
-  },
-  pagination = { // Cấu hình phân trang (dots)
-    el: null,     // Selector của container chứa dots
-    clickable: true // Cho phép click vào dots để chuyển slide
-  },
-  breakpoints = null, // Cấu hình responsive
-  ...extraOptions // Các tùy chọn Swiper khác
-}) {
-  const swiperContainer = document.querySelector(mainSelector);
-  if (!swiperContainer) {
-    console.warn(`Swiper container not found for selector: ${mainSelector}`);
-    return;
-  }
-
-  // Nếu loop được bật và minSlides được chỉ định, đảm bảo đủ slide để vòng lặp mượt mà
-  if (loop && minSlides > 0) {
-    const wrapper = swiperContainer.querySelector('.swiper-wrapper');
-    if (wrapper) {
-      const slides = Array.from(wrapper.children);
-      let currentSlideCount = slides.length;
-      // Swiper cần ít nhất slidesPerView * 2 (hoặc hơn) để loop mượt mà khi slidesPerView > 1
-      // Nếu slidesPerView = 1, cần ít nhất 2-3 slide
-      const requiredForLoop = slidesPerView > 1 ? slidesPerView * 2 : 3;
-      const actualMin = Math.max(minSlides, requiredForLoop);
-
-      if (currentSlideCount < actualMin) {
-        for (let i = 0; i < actualMin - currentSlideCount; i++) {
-          wrapper.appendChild(slides[i % currentSlideCount].cloneNode(true));
-        }
-      }
-    }
-  }
-
-  const swiperOptions = {
-    slidesPerView: slidesPerView,
-    spaceBetween: spaceBetween,
-    loop: loop,
-    autoplay: autoplay ? {
-      delay: typeof autoplay === 'number' ? autoplay : 2500,
-      disableOnInteraction: false,
-      ...(typeof autoplay === 'object' ? autoplay : {})
-    } : false,
-    navigation: navigation.nextEl || navigation.prevEl ? navigation : false,
-    pagination: pagination.el ? pagination : false,
-    breakpoints: breakpoints,
-    ...extraOptions
-  };
-
-  new Swiper(swiperContainer, swiperOptions);
-}
-
-// js roll to top
-function initScrollToTop(btnId = "btnToTop", showOffset = 1000) {
-  const scrollBtn = document.getElementById(btnId);
-  if (!scrollBtn) return;
-
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > showOffset) {
-      scrollBtn.classList.add("show");
-    } else {
-      scrollBtn.classList.remove("show");
-    }
-  });
-
-  scrollBtn.addEventListener("click", () => {
-    window.scroll({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
-}
-
 // js validate form
 function validateField(input) {
   const group = input.closest(".form-group");
@@ -748,18 +665,64 @@ function initThemeSwitcher(options = {}) {
   });
 }
 
+// js lấy kich thước cột bỏ vào class 
+function syncWidthWithTableCols(targetSelector, tableSelector, startIndex = 0, numberOfCols = 1) {
+    
+    const tableElement = document.querySelector(tableSelector);
+    const targetElement = document.querySelector(targetSelector);
+
+    if (!targetElement || !tableElement) {
+        return;
+    }
+
+    const updateWidth = () => {
+        const currentTable = document.querySelector(tableSelector);
+        const currentTarget = document.querySelector(targetSelector);
+        if (!currentTable || !currentTarget) return;
+        let columns = currentTable.querySelectorAll('thead tr:first-child th');
+        if (columns.length === 0) {
+            columns = currentTable.querySelectorAll('tbody tr:first-child td');
+        }
+
+        if (columns.length === 0) return;
+
+        let totalWidth = 0;
+        let endIdx = Math.min(startIndex + numberOfCols, columns.length);
+        
+        for (let i = startIndex; i < endIdx; i++) {
+            const colWidth = columns[i].offsetWidth;
+            totalWidth += colWidth;
+            
+            let colName = columns[i].textContent.trim().replace(/\s+/g, ' ');
+            if (!colName) colName = "Cột Checkbox/Icon";
+        }
+        // =====================================
+        if (totalWidth > 0) {
+            currentTarget.style.minWidth = `${totalWidth}px`;
+        }
+    };
+
+    updateWidth();
+
+    const resizeObserver = new ResizeObserver(() => {
+        requestAnimationFrame(updateWidth);
+    });
+    
+    resizeObserver.observe(tableElement);
+}
+
 // Gọi hàm khởi tạo khi trang web đã load xong HTM
 
 // Chạy hàm khi trang web tải xong
 
 // ----------- Vùng gọi biến --------------
 document.addEventListener("DOMContentLoaded", async () => {
-  
+
   // 1. Bắt hệ thống phải DỪNG LẠI CHỜ load xong toàn bộ file HTML (Header, Footer, Menu...)
   await includeHTML();
 
   // 2. Tới dòng này là 100% HTML đã đầy đủ trên trang. Bắt đầu gọi các hàm khởi tạo:
-  
+
   initToggleSystem([
     {
       trigger: '.section-icon__wrapper-second',
@@ -771,15 +734,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       activeClass: 'active'
     }
   ]);
-  
+
   toggleColor();
-  
+
   initThemeSwitcher({
     palettes: {
       green: { primary: '#70AD47', secondary: '#E2F0D9', third: '#C6E0B4' },
       blue: { primary: '#4472C4', secondary: '#D9E1F2', third: '#B4C6E7' },
       orange: { primary: '#ED7D31', secondary: '#FCE4D6', third: '#F8CBAD' },
-      pink: { primary: '#FF69B4', secondary: '#FFB6C1', third: '#FFC0CB' } 
+      pink: { primary: '#FF69B4', secondary: '#FFB6C1', third: '#FFC0CB' }
     }
   });
 
@@ -787,13 +750,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   initSmartFormSettings();
   setupDynamicTable();
 
+  syncWidthWithTableCols('.toolbar-left', '.dynamic-table__content', 0, 4);
+
   // Kể cả Jquery bồ cũng ném vào đây luôn, không cần $(document).ready() riêng lẻ nữa
   if (typeof $ !== 'undefined') {
-      $(".datepicker-custom").datepicker({
-        dateFormat: "dd/mm/yy",
-        changeMonth: true,
-        changeYear: true,
-        firstDay: 0
-      });
+    $(".datepicker-custom").datepicker({
+      dateFormat: "dd/mm/yy",
+      changeMonth: true,
+      changeYear: true,
+      firstDay: 0
+    });
   }
 });

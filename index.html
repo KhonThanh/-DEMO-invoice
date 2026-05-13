@@ -15,13 +15,16 @@
     <link rel="stylesheet" href="./css/utility.css">
 </head>
 
-<body>
-    <main class="container-f flex flex-col center-hor pos-rel">
+<body class="flex flex-col gap-10">
+    <header class="container-f bg-secondary" data-include="./component/header.html"></header>
+    <main class="container-f flex flex-col pos-rel flex-1">
         <section class="container-f flex flex-col bg-white">
             <div class="container-l flex flex-col gap-2">
                 <div class="flex flex-wrap jus-sb form-invoice__container">
-                    <div class="form-invoice invoice-info-section flex flex-col gap-1" data-include="./component/thongtinhoadon.html"></div>
-                    <div class="form-invoice buyer-info-section flex flex-col gap-1" data-include="./component/thongtinnguoimua.html"></div>
+                    <div class="form-invoice invoice-info-section flex flex-col gap-1"
+                        data-include="./component/thongtinhoadon.html"></div>
+                    <div class="form-invoice buyer-info-section flex flex-col gap-1"
+                        data-include="./component/thongtinnguoimua.html"></div>
                 </div>
                 <div class="pos-rel" data-include="./component/table.html"></div>
                 <div class="theme-switcher bg-white border-radius-5">
@@ -49,6 +52,7 @@
             </div>
         </section>
     </main>
+    <footer class="container-f bg-secondary center-ver flex flex-col item-padding-80-0 gap-30" data-include="./component/footer.html"></footer>
     <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script defer src="./js/frontend.js"></script>

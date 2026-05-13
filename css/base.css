@@ -54,6 +54,7 @@ body {
   font-family: var(--font-roboto);
   overflow-x: hidden;
   position: relative;
+  min-height: 100vh;
 }
 
 header,
@@ -67,8 +68,8 @@ header {
   position: sticky;
   top: 0px;
   left: 0px;
-  background-color: var(--white-color);
-  box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid var(--primary-color);
+  border-top: 1px solid var(--primary-color);
 }
 
 h1,

@@ -732,6 +732,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       closeOnEsc: true,
       closeBtn: '.btn-close-setting',
       activeClass: 'active'
+    },
+    {
+      trigger: '.menu-mobile__btn',
+      target: '.menu-mobile',
+      behavior: 'toggle',
+      closeOnOutside: true,
+      closeOnEsc: true,
+      activeClass: 'active'
     }
   ]);
 

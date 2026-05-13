@@ -549,3 +549,9 @@ a.ui-button:active,
     font-size: calc(var(--font-size-base) - 4px);
     width: fit-content;
 }   
+
+.footer-menu,
+.footer-menu strong,
+.footer-menu p{
+    font-size: calc(var(--font-size-base) - 4px);
+}

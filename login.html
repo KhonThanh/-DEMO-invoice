@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice | Trang chủ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="../css/style.min.css"> -->
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/utility.css">
+</head>
+
+<body class="flex flex-col gap-10">
+    <header class="container-f  bg-secondary" data-include="./component/header.html"></header>
+    <main class="container-f flex flex-col pos-rel flex-1">
+        <section class="container-f flex center-ver container-padding">
+            <div class="auth-login__wrapper container-xxs flex flex-col gap-10 center-ver" id="section-login">
+                <h3 class="auth-login__title">Đăng nhập tài khoản</h3>
+                <p class="auth-login__desc">Vui lòng nhập thông tin đăng nhập</p>
+
+                <form class="auth-login__form js-validate-form flex flex-col gap-20" data-form="login">
+
+                    <p>Tài khoản</p>
+                    <div class="auth-login__input-group flex">
+                        <input type="text" name="username" placeholder="Tài khoản" required autocomplete="username"
+                            data-msg="Vui lòng nhập tài khoản">
+                        <small class="auth-login__error-msg"></small>
+                    </div>
+
+                    <p>Mật khẩu</p>
+                    <div class="auth-login__input-group flex">
+                        <input type="password" name="password" placeholder="Mật khẩu" required minlength="6"
+                            autocomplete="current-password" data-msg="Mật khẩu tối thiểu 6 ký tự">
+                        <small class="auth-login__error-msg"></small>
+                    </div>
+
+                    <div class="auth-login__forget-pass flex jus-sb">
+                        <span></span> <a href="../forgetpass.html" class="cursor-pointer">Quên mật khẩu</a>
+                    </div>
+
+                    <button type="submit" class="auth-login__btn-submit">Đăng nhập</button>
+                    <p class="text-center">Bạn có tài khoản chưa? <u><a href="./signin.html">Đăng ký ngay</a></u></p>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer class="container-f bg-secondary center-ver flex flex-col item-padding-80-0 gap-30"
+        data-include="./component/footer.html"></footer>
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script defer src="./js/frontend.js"></script>
+</body>
+
+</html>

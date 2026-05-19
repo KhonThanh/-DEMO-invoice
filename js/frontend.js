@@ -666,49 +666,56 @@ function initThemeSwitcher(options = {}) {
 }
 
 // js lấy kich thước cột bỏ vào class 
-function syncWidthWithTableCols(targetSelector, tableSelector, startIndex = 0, numberOfCols = 1) {
-    
-    const tableElement = document.querySelector(tableSelector);
-    const targetElement = document.querySelector(targetSelector);
+function syncElementWidth(targetSelector, tableSelector, startIndex = 0, colCount = 1, divideBy = 1, useMinWidth = false) {
+  const tableElement = document.querySelector(tableSelector);
 
-    if (!targetElement || !tableElement) {
-        return;
+  const targets = document.querySelectorAll(targetSelector);
+
+  if (!tableElement || targets.length === 0) return;
+
+  const updateWidth = () => {
+    const currentTable = document.querySelector(tableSelector);
+    if (!currentTable) return;
+
+    let columns = currentTable.querySelectorAll('thead tr:first-child th');
+    if (columns.length === 0) {
+      columns = currentTable.querySelectorAll('tbody tr:first-child td');
+    }
+    if (columns.length === 0) return;
+
+    const totalCols = columns.length;
+
+    const actualStartIndex = startIndex < 0 ? Math.max(0, totalCols + startIndex) : startIndex;
+    const endIdx = Math.min(actualStartIndex + colCount, totalCols);
+
+    let totalWidth = 0;
+    for (let i = actualStartIndex; i < endIdx; i++) {
+      totalWidth += columns[i].offsetWidth;
     }
 
-    const updateWidth = () => {
-        const currentTable = document.querySelector(tableSelector);
-        const currentTarget = document.querySelector(targetSelector);
-        if (!currentTable || !currentTarget) return;
-        let columns = currentTable.querySelectorAll('thead tr:first-child th');
-        if (columns.length === 0) {
-            columns = currentTable.querySelectorAll('tbody tr:first-child td');
+    // ÁP DỤNG KÍCH THƯỚC LÊN GIAO DIỆN
+    if (totalWidth > 0) {
+      const finalWidth = totalWidth / divideBy;
+
+      targets.forEach(target => {
+        if (useMinWidth) {
+          target.style.minWidth = `${finalWidth}px`;
+        } else {
+          target.style.width = `${finalWidth}px`;
+          target.style.flex = 'none'; 
         }
+      });
+    }
+  };
 
-        if (columns.length === 0) return;
+  // Chạy ngay lần đầu
+  updateWidth();
 
-        let totalWidth = 0;
-        let endIdx = Math.min(startIndex + numberOfCols, columns.length);
-        
-        for (let i = startIndex; i < endIdx; i++) {
-            const colWidth = columns[i].offsetWidth;
-            totalWidth += colWidth;
-            
-            let colName = columns[i].textContent.trim().replace(/\s+/g, ' ');
-            if (!colName) colName = "Cột Checkbox/Icon";
-        }
-        // =====================================
-        if (totalWidth > 0) {
-            currentTarget.style.minWidth = `${totalWidth}px`;
-        }
-    };
-
-    updateWidth();
-
-    const resizeObserver = new ResizeObserver(() => {
-        requestAnimationFrame(updateWidth);
-    });
-    
-    resizeObserver.observe(tableElement);
+  // Theo dõi co giãn
+  const resizeObserver = new ResizeObserver(() => {
+    requestAnimationFrame(updateWidth);
+  });
+  resizeObserver.observe(tableElement);
 }
 
 // Gọi hàm khởi tạo khi trang web đã load xong HTM
@@ -758,7 +765,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   initSmartFormSettings();
   setupDynamicTable();
 
-  syncWidthWithTableCols('.toolbar-left', '.dynamic-table__content', 0, 4);
+  syncElementWidth('.toolbar-left', '.dynamic-table__content', 0, 4, 1, true);
+
+  syncElementWidth('#btn-danh-sach', '.dynamic-table__content', 0, 2);
+
+  syncElementWidth('#btn-group-action', '.dynamic-table__content', -3, 3);
 
   // Kể cả Jquery bồ cũng ném vào đây luôn, không cần $(document).ready() riêng lẻ nữa
   if (typeof $ !== 'undefined') {

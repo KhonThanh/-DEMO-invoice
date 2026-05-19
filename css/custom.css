@@ -14,6 +14,12 @@
     width: fit-content;
 }
 
+.dynamic-table tbody tr td select {
+    width: 100%;
+    background-color: transparent  ;
+    border: transparent;
+}
+
 .dynamic-table th,
 .dynamic-table td {
     font-size: calc(var(--font-size-base) - 4px);
@@ -245,9 +251,6 @@ select {
     margin-top: 1px;
 }
 
-.function-container .btn-action__custom {
-    width: calc(294px / 2 - 10px);
-}
 
 .form-invoice__slot {
     padding: 5px;

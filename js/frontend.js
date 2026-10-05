@@ -608,63 +608,6 @@ function setupDynamicTable() {
   }
 }
 
-// js đổi màu khi check
-function toggleColor() {
-  const tableBody = document.querySelector('.dynamic-table__content tbody');
-
-  if (!tableBody) return;
-  tableBody.addEventListener('change', function (e) {
-    if (e.target.matches('.cb-khuyenmai')) {
-      const isChecked = e.target.checked;
-      const currentRow = e.target.closest('tr');
-      if (!currentRow) return;
-      const cells = currentRow.querySelectorAll('td');
-      const totalCols = cells.length;
-      if (totalCols >= 3) {
-        for (let i = totalCols - 3; i < totalCols; i++) {
-          cells[i].classList.toggle('note-content', isChecked);
-        }
-      }
-    }
-  });
-}
-
-// js đổi màu theme
-function initThemeSwitcher(options = {}) {
-  // 1. Cấu hình mặc định (bồ có thể truyền vào để ghi đè)
-  const radioSelector = options.selector || 'input[name="themeSelector"]';
-
-  // Bảng màu mặc định
-  const palettes = options.palettes || {
-    green: { primary: '#70AD47', secondary: '#E2F0D9', third: '#C6E0B4' },
-    blue: { primary: '#4472C4', secondary: '#D9E1F2', third: '#B4C6E7' },
-    orange: { primary: '#ED7D31', secondary: '#FCE4D6', third: '#F8CBAD' }
-  };
-
-  // 2. Tìm tất cả các radio button đổi theme
-  const themeRadios = document.querySelectorAll(radioSelector);
-  if (!themeRadios.length) return;
-
-  // 3. Gắn sự kiện lắng nghe
-  themeRadios.forEach(radio => {
-    // Mẹo: Tránh việc bị gắn sự kiện nhiều lần nếu gọi hàm lại
-    if (radio.dataset.themeBound === "true") return;
-    radio.dataset.themeBound = "true";
-
-    radio.addEventListener('change', function (e) {
-      // Lấy bộ màu tương ứng với value của radio
-      const selectedTheme = palettes[e.target.value];
-      if (!selectedTheme) return; // Nếu value không có trong bảng màu thì bỏ qua
-
-      // Ghi đè CSS Variables
-      const root = document.documentElement;
-      root.style.setProperty('--primary-color', selectedTheme.primary);
-      root.style.setProperty('--secondary-color', selectedTheme.secondary);
-      root.style.setProperty('--third-color', selectedTheme.third);
-    });
-  });
-}
-
 // js lấy kich thước cột bỏ vào class 
 function syncElementWidth(targetSelector, tableSelector, startIndex = 0, colCount = 1, divideBy = 1, useMinWidth = false) {
   const tableElement = document.querySelector(tableSelector);
@@ -702,33 +645,145 @@ function syncElementWidth(targetSelector, tableSelector, startIndex = 0, colCoun
           target.style.minWidth = `${finalWidth}px`;
         } else {
           target.style.width = `${finalWidth}px`;
-          target.style.flex = 'none'; 
+          target.style.flex = 'none';
         }
       });
     }
   };
 
-  // Chạy ngay lần đầu
   updateWidth();
 
-  // Theo dõi co giãn
   const resizeObserver = new ResizeObserver(() => {
     requestAnimationFrame(updateWidth);
   });
   resizeObserver.observe(tableElement);
 }
+// js mới 5-10-2026 mới cập nhật
+function adjustColorBrightness(hex, percent) {
+  let num = parseInt(hex.replace('#', ''), 16),
+    amt = Math.round(2.55 * percent),
+    R = (num >> 16) + amt,
+    G = (num >> 8 & 0x00FF) + amt,
+    B = (num & 0x0000FF) + amt;
+  R = Math.min(255, Math.max(0, R));
+  G = Math.min(255, Math.max(0, G));
+  B = Math.min(255, Math.max(0, B));
+  return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+}
 
-// Gọi hàm khởi tạo khi trang web đã load xong HTM
+function mixWithWhite(hex, ratio = 0.15) {
+  hex = hex.replace('#', '');
 
-// Chạy hàm khi trang web tải xong
+  let r = parseInt(hex.substring(0, 2), 16);
+  let g = parseInt(hex.substring(2, 4), 16);
+  let b = parseInt(hex.substring(4, 6), 16);
+  let rNew = Math.round(r * ratio + 255 * (1 - ratio));
+  let gNew = Math.round(g * ratio + 255 * (1 - ratio));
+  let bNew = Math.round(b * ratio + 255 * (1 - ratio));
+
+  return '#' + ((1 << 24) + (rNew << 16) + (gNew << 8) + bNew).toString(16).slice(1);
+}
+function applyThemeColor(primaryHex) {
+  const secondaryHex = mixWithWhite(primaryHex, 0.15);
+
+  const thirdHex = mixWithWhite(primaryHex, 0.30);
+
+  const root = document.documentElement;
+  root.style.setProperty('--primary-color', primaryHex);
+  root.style.setProperty('--secondary-color', secondaryHex);
+  root.style.setProperty('--third-color', thirdHex);
+
+  localStorage.setItem('app_selected_theme', primaryHex);
+
+  document.querySelectorAll('.color-swatch').forEach(s => {
+    if (s.getAttribute('data-color').toLowerCase() === primaryHex.toLowerCase()) {
+      s.classList.add('active');
+    } else {
+      s.classList.remove('active');
+    }
+  });
+}
+
+function initWordThemePicker() {
+  const toggleBtn = document.getElementById('theme-toggle-btn');
+  const popup = document.getElementById('theme-picker-popup');
+  const themeGrid = document.getElementById('theme-colors-grid');
+  const standardGrid = document.getElementById('standard-colors-grid');
+
+  if (!themeGrid || !standardGrid || !toggleBtn || !popup) return;
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    popup.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!popup.contains(e.target) && e.target !== toggleBtn) {
+      popup.classList.remove('open');
+    }
+  });
+
+  const baseThemeColors = [
+    "#212529", 
+    "#DC3545", 
+    "#E83E8C", 
+    "#6F42C1", 
+    "#0D6EFD", 
+    "#0DCAF0", 
+    "#20C997", 
+    "#198754", 
+    "#FFC107",
+    "#FD7E14", 
+    "#795548", 
+    "#6C757D"  
+  ];
+
+  const standardColors = [
+    "#900C3F", "#C00000", "#FF1493", "#7030A0",
+    "#0070C0", "#00B0F6", "#00A896", "#00B050",
+    "#FFC000", "#FF6F00", "#5D4037", "#495057"
+  ];
+
+  const tintMatrix = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [-15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15],
+    [-35, -35, -35, -35, -35, -35, -35, -35, -35, -35, -35, -35],
+    [-55, -55, -55, -55, -55, -55, -55, -55, -55, -55, -55, -55]
+  ];
+
+  let themeHTML = '';
+  tintMatrix.forEach(row => {
+    row.forEach((tint, colIdx) => {
+      const hex = adjustColorBrightness(baseThemeColors[colIdx], tint);
+      themeHTML += `<div class="color-swatch" data-color="${hex}" style="background-color: ${hex};"></div>`;
+    });
+  });
+  themeGrid.innerHTML = themeHTML;
+
+  let standardHTML = '';
+  standardColors.forEach(hex => {
+    standardHTML += `<div class="color-swatch" data-color="${hex}" style="background-color: ${hex};"></div>`;
+  });
+  standardGrid.innerHTML = standardHTML;
+
+  document.querySelectorAll('.color-swatch').forEach(swatch => {
+    swatch.addEventListener('click', function () {
+      const primaryHex = this.getAttribute('data-color');
+      applyThemeColor(primaryHex);
+    });
+  });
+
+  const savedTheme = localStorage.getItem('app_selected_theme');
+  if (savedTheme) {
+    applyThemeColor(savedTheme);
+  }
+}
+
 
 // ----------- Vùng gọi biến --------------
 document.addEventListener("DOMContentLoaded", async () => {
 
-  // 1. Bắt hệ thống phải DỪNG LẠI CHỜ load xong toàn bộ file HTML (Header, Footer, Menu...)
   await includeHTML();
-
-  // 2. Tới dòng này là 100% HTML đã đầy đủ trên trang. Bắt đầu gọi các hàm khởi tạo:
 
   initToggleSystem([
     {
@@ -750,16 +805,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   ]);
 
-  toggleColor();
-
-  initThemeSwitcher({
-    palettes: {
-      green: { primary: '#70AD47', secondary: '#E2F0D9', third: '#C6E0B4' },
-      blue: { primary: '#4472C4', secondary: '#D9E1F2', third: '#B4C6E7' },
-      orange: { primary: '#ED7D31', secondary: '#FCE4D6', third: '#F8CBAD' },
-      pink: { primary: '#FF69B4', secondary: '#FFB6C1', third: '#FFC0CB' }
-    }
-  });
+  initWordThemePicker();
 
   renderFormSettingsData();
   initSmartFormSettings();
@@ -771,7 +817,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   syncElementWidth('#btn-group-action', '.dynamic-table__content', -3, 3);
 
-  // Kể cả Jquery bồ cũng ném vào đây luôn, không cần $(document).ready() riêng lẻ nữa
   if (typeof $ !== 'undefined') {
     $(".datepicker-custom").datepicker({
       dateFormat: "dd/mm/yy",
